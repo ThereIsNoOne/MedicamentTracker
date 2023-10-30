@@ -39,4 +39,8 @@ public abstract class Medicament {
         }
         quantity += increasingValue;
     }
+
+    public void taken() {
+        quantity -= dose;
+    }
 }

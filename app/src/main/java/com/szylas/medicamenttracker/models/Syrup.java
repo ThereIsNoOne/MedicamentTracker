@@ -17,17 +17,15 @@ public class Syrup extends Medicament {
 
     public void decreaseVolume(int decreasingVolume) {
         if (decreasingVolume <= 0) {
-            if (decreasingVolume <= 0) {
-                throw new IllegalArgumentException(
-                        String.format("Decreasing volume has to be more than 0, but is %d",
-                                decreasingVolume));
-            }
-            if (decreasingVolume > volume) {
-                throw new IllegalArgumentException(
-                        String.format("Decreasing volume (%d) is more than actual volume (%d).",
-                                decreasingVolume, volume)
-                );
-            }
+            throw new IllegalArgumentException(
+                    String.format("Decreasing volume has to be more than 0, but is %d",
+                            decreasingVolume));
+        }
+        if (decreasingVolume > volume) {
+            throw new IllegalArgumentException(
+                    String.format("Decreasing volume (%d) is more than actual volume (%d).",
+                            decreasingVolume, volume)
+            );
         }
         volume -= decreasingVolume;
     }
