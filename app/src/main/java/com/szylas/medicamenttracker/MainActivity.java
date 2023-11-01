@@ -1,23 +1,19 @@
 package com.szylas.medicamenttracker;
 
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
+
+import com.google.android.material.textfield.TextInputLayout;
+import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
+import com.szylas.medicamenttracker.datastore.TreatmentsReader;
+import com.szylas.medicamenttracker.models.Medicament;
+import com.szylas.medicamenttracker.models.Treatment;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,18 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+        TextInputLayout testView = findViewById(R.id.testText);
+        ArrayList<Treatment> treatments = TreatmentsReader.loadTreatments(getAssets());
+        StringBuilder test = new StringBuilder();
+        for (Treatment treatment : treatments) {
+            for (Medicament med : treatment) {
+                test.append(String.format("Medication: %s\n", med));
             }
-        });
+        }
+        testView.setHelperText(test.toString());
     }
 
     @Override
@@ -69,10 +62,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
