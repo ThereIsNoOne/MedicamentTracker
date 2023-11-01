@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.szylas.medicamenttracker"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.szylas.medicamenttracker"
@@ -31,6 +31,13 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    sourceSets {
+        getByName("main") {
+            resources {
+                srcDirs("src\\main\\resources", "src\\main\\resources")
+            }
+        }
     }
 }
 
