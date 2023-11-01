@@ -1,5 +1,7 @@
 package com.szylas.medicamenttracker.models;
 
+import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
+
 public abstract class Medicament {
 
     protected String name;
@@ -41,6 +43,14 @@ public abstract class Medicament {
     }
 
     public void taken() {
+        if (quantity < dose) {
+            throw new OutOfMedsException("There is not enough meds.");
+        }
         quantity -= dose;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Type: %s, name: %s, dose: %d, quantity: %d", getClass(), name, dose, quantity);
     }
 }
