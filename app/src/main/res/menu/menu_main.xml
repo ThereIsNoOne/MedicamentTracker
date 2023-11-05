@@ -7,4 +7,14 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/manage_meds"
+        android:orderInCategory="1"
+        android:title="@string/organize_meds"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/add_meds"
+        android:orderInCategory="2"
+        android:title="@string/add_med"
+        app:showAsAction="never"/>
 </menu>

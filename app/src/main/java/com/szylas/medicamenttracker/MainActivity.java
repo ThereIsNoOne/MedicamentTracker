@@ -28,16 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
-        TextInputLayout testView = findViewById(R.id.testText);
-        ArrayList<Treatment> treatments = TreatmentsReader.loadTreatments(getAssets());
-        StringBuilder test = new StringBuilder();
-        for (Treatment treatment : treatments) {
-            for (Medicament med : treatment) {
-                test.append(String.format("Medication: %s\n", med));
-            }
-        }
-        testView.setHelperText(test.toString());
     }
 
     @Override
@@ -58,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        System.out.printf("User clicked %s", item);
         return super.onOptionsItemSelected(item);
     }
 
