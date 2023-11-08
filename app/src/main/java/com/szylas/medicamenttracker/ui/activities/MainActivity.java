@@ -16,6 +16,7 @@ import com.szylas.medicamenttracker.models.meds.Pill;
 import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.ui.adapters.MedListAdapter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

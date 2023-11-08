@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.models.MedTimePair;
-import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.models.meds.Medicament;
 
 import java.time.LocalDate;
@@ -24,16 +23,23 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
     private ArrayList<MedTimePair<LocalTime, Medicament>> todayMeds;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView nameView;
+        private final TextView medNameView;
+        private final TextView medTimeView;
 
         public ViewHolder(View view) {
             super(view);
 
-            nameView = (TextView) view.findViewById(R.id.medName);
+            medNameView = (TextView) view.findViewById(R.id.medName);
+            medTimeView = (TextView) view.findViewById(R.id.medTime);
+
         }
 
-        public TextView getNameView() {
-            return nameView;
+        public TextView getMedNameView() {
+            return medNameView;
+        }
+
+        public TextView getTimeTextView() {
+            return medTimeView;
         }
     }
 
@@ -61,8 +67,9 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
-        holder.getNameView().setText(todayMeds.get(position).getValue().getName());
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        holder.getMedNameView().setText(todayMeds.get(position).getValue().getName());
+        holder.getTimeTextView().setText(todayMeds.get(position).getKey().toString());
     }
 
     @Override
