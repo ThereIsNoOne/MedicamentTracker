@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="secondary">#525252</color>
+    <color name="primary">#313131</color>
+    <color name="primary_container">#414141</color>
+    <color name="on_pirmaty">#CA3E47</color>
 </resources>

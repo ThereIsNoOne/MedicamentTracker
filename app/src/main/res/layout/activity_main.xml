@@ -7,30 +7,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbarWrapper"
+        android:id="@+id/toolbar_wrapper"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="enterAlways"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <view class="androidx.appcompat.app.AlertController$RecycleListView"
-        app:layout_constraintTop_toBottomOf="@id/toolbarWrapper"
+    <androidx.recyclerview.widget.RecyclerView class="androidx.appcompat.app.AlertController$RecycleListView"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_wrapper"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/med_recycler_view"
         android:padding="@dimen/padding"
         android:layout_margin="@dimen/fab_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-    </view>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
