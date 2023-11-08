@@ -4,7 +4,7 @@ import android.content.res.AssetManager;
 
 import com.szylas.medicamenttracker.builders.MedicamentBuilder;
 import com.szylas.medicamenttracker.models.MedType;
-import com.szylas.medicamenttracker.models.Medicament;
+import com.szylas.medicamenttracker.models.meds.Medicament;
 import com.szylas.medicamenttracker.models.Treatment;
 
 import java.io.IOException;

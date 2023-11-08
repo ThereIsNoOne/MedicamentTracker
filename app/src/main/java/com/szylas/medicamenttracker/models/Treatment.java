@@ -3,9 +3,10 @@ package com.szylas.medicamenttracker.models;
 import androidx.annotation.NonNull;
 
 import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
+import com.szylas.medicamenttracker.models.meds.Medicament;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,6 +27,12 @@ public class Treatment implements Iterable<Medicament> {
                      LocalDate startDate,
                      LocalDate finishDate,
                      ArrayList<LocalTime> applicationTime) {
+        if (applicationTime.size() == 0) {
+            throw new IllegalStateException("Application time should not be empty");
+        }
+        if (startDate == null) {
+            throw new IllegalStateException("Start date should not be null");
+        }
         this.applicationTime = applicationTime;
         this.startDate = startDate;
         this.finishDate = finishDate;
@@ -36,6 +43,12 @@ public class Treatment implements Iterable<Medicament> {
                      LocalDate startDate,
                      LocalDate finishDate,
                      ArrayList<LocalTime> applicationTime) {
+        if (applicationTime.size() == 0) {
+            throw new IllegalStateException("Application time should not be empty");
+        }
+        if (startDate == null) {
+            throw new IllegalStateException("Start date should not be null");
+        }
         this.applicationTime = applicationTime;
         this.startDate = startDate;
         this.finishDate = finishDate;
@@ -70,5 +83,32 @@ public class Treatment implements Iterable<Medicament> {
     @Override
     public Iterator<Medicament> iterator() {
         return medications.iterator();
+    }
+
+    public Medicament get(int index) {
+        return medications.get(index);
+    }
+
+    public int size() {
+        return medications.size();
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public Optional<LocalDate> getFinishDate() {
+        return Optional.ofNullable(finishDate);
+    }
+
+    public ArrayList<MedTimePair<LocalTime, Medicament>> getMedTimePairs() {
+        return new ArrayList<MedTimePair<LocalTime, Medicament>>() {{
+            for (LocalTime time: applicationTime) {
+                for (Medicament medicament: medications) {
+                    add(new MedTimePair(time, medicament));
+                }
+            }
+        }};
+
     }
 }

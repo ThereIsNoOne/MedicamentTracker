@@ -1,10 +1,10 @@
 package com.szylas.medicamenttracker.builders;
 
-import com.szylas.medicamenttracker.models.Injection;
+import com.szylas.medicamenttracker.models.meds.Injection;
 import com.szylas.medicamenttracker.models.MedType;
-import com.szylas.medicamenttracker.models.Medicament;
-import com.szylas.medicamenttracker.models.Pill;
-import com.szylas.medicamenttracker.models.Syrup;
+import com.szylas.medicamenttracker.models.meds.Medicament;
+import com.szylas.medicamenttracker.models.meds.Pill;
+import com.szylas.medicamenttracker.models.meds.Syrup;
 
 public class MedicamentBuilder {
     public static Medicament getMedicament(MedType type,
