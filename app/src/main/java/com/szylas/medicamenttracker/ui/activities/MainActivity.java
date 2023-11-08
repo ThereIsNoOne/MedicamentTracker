@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.szylas.medicamenttracker.R;
+import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
 import com.szylas.medicamenttracker.datastore.TreatmentsReader;
 import com.szylas.medicamenttracker.models.meds.Pill;
@@ -22,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private ArrayList<Treatment> treatmentList;
-    private int currentTreatment = 0;
+
     private MedListAdapter medListAdapter;
 
     @Override
@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        treatmentList = TreatmentsReader.loadTreatments(getAssets());
-        medListAdapter = new MedListAdapter(treatmentList.get(currentTreatment));
+        medListAdapter = new MedListAdapter(new TreatmentsManager(getAssets()));
 
         setupMedRecyclerView();
     }
@@ -67,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.add_meds) {
-            treatmentList.get(currentTreatment).addMedicament(new Pill("Test pill", 1, 1));
-            medListAdapter.notifyItemInserted(treatmentList.get(currentTreatment).size() - 1);
             return true;
         }
 

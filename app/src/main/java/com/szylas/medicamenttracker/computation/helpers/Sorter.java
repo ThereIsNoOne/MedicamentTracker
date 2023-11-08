@@ -5,8 +5,6 @@ import com.szylas.medicamenttracker.models.meds.Medicament;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Sorter {

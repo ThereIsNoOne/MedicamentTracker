@@ -9,11 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.szylas.medicamenttracker.R;
+import com.szylas.medicamenttracker.computation.TreatmentsManager;
+import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.Treatment;
+import com.szylas.medicamenttracker.models.meds.Medicament;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHolder> {
 
-    private Treatment medicamentList;
+    private TreatmentsManager treatmentsManager;
+    private ArrayList<MedTimePair<LocalTime, Medicament>> todayMeds;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nameView;
@@ -29,8 +37,18 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         }
     }
 
-    public MedListAdapter(Treatment medsList) {
-        medicamentList = medsList;
+    public MedListAdapter(TreatmentsManager treatmentsManager) {
+        this.treatmentsManager = treatmentsManager;
+        setUpTodayMeds(LocalDate.now());
+    }
+
+    public MedListAdapter(TreatmentsManager treatmentsManager, LocalDate today) {
+        this.treatmentsManager = treatmentsManager;
+        setUpTodayMeds(today);
+    }
+
+    private void setUpTodayMeds(LocalDate date) {
+        todayMeds = treatmentsManager.treatmentsForDay(date);
     }
 
     @NonNull
@@ -44,12 +62,12 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
-        holder.getNameView().setText(medicamentList.get(position).getName());
+        holder.getNameView().setText(todayMeds.get(position).getValue().getName());
     }
 
     @Override
     public int getItemCount() {
-        return medicamentList.size();
+        return todayMeds.size();
     }
 
 
