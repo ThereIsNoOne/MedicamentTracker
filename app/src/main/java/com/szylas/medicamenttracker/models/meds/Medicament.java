@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.models;
+package com.szylas.medicamenttracker.models.meds;
 
 import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
 

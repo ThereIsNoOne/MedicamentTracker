@@ -1,8 +1,8 @@
-package com.szylas.medicamenttracker.models;
+package com.szylas.medicamenttracker.models.meds;
 
-public class Pill extends Medicament {
+public class Injection extends Medicament {
 
-    public Pill(String name, int quantity, int dose) {
+    public Injection(String name, int quantity, int dose) {
         this.name = name;
         this.quantity = quantity;
         this.dose = dose;

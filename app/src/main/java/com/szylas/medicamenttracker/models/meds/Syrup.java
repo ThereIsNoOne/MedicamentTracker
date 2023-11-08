@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.models;
+package com.szylas.medicamenttracker.models.meds;
 
 public class Syrup extends Medicament {
     private int volume;
