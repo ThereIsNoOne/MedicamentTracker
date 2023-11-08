@@ -19,7 +19,7 @@ public class TreatmentsManager {
     /**
      * Stores treatments, as a map where treatment is value and starting date is the key.
      */
-    private HashMap<LocalDate, Treatment> treatmentsMap;
+    private HashMap<LocalDate, Treatment> treatmentsMap = new HashMap<>();
 
     public TreatmentsManager(AssetManager assets) {
         for (Treatment treatment : TreatmentsReader.loadTreatments(assets)) {
