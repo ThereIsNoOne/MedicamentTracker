@@ -3,4 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="organize_meds">Manage medications</string>
     <string name="add_med">Add medication</string>
+    <string name="test_text">
+        There is a lot of text, that is supposed to show up in testing situations
+    </string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

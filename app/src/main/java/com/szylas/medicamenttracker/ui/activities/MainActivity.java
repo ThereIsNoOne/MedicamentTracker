@@ -1,5 +1,6 @@
 package com.szylas.medicamenttracker.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,13 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
-import com.szylas.medicamenttracker.datastore.TreatmentsReader;
-import com.szylas.medicamenttracker.models.meds.Pill;
-import com.szylas.medicamenttracker.models.Treatment;
-import com.szylas.medicamenttracker.ui.adapters.MedListAdapter;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
+import com.szylas.medicamenttracker.ui.helpers.MedListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private MedListAdapter medListAdapter;
+    private TreatmentsManager treatmentsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        medListAdapter = new MedListAdapter(new TreatmentsManager(getAssets()));
+        treatmentsManager = new TreatmentsManager(getAssets());
+        medListAdapter = new MedListAdapter(treatmentsManager);
 
         setupMedRecyclerView();
     }
@@ -50,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        System.out.println("Menu");
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -67,9 +63,15 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.add_meds) {
+            startMedAddActivity();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startMedAddActivity() {
+        Intent intent = new Intent(MainActivity.this, AddMedsActivity.class);
+        startActivity(intent);
     }
 }

@@ -8,7 +8,9 @@ import com.szylas.medicamenttracker.datastore.TreatmentsReader;
 import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.models.meds.Medicament;
+import com.szylas.medicamenttracker.models.meds.Pill;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -41,5 +43,17 @@ public class TreatmentsManager {
             todayMeds.addAll(entry.getValue().getMedTimePairs());
         }
         return sort(todayMeds);
+    }
+
+    public void testPut() {
+        treatmentsMap.put(LocalDate.now(), new Treatment(
+                new Pill("Test", 30, 1),
+                LocalDate.of(2022, 11, 1),
+                LocalDate.of(2024, 11, 1),
+                new ArrayList<LocalTime>() {{
+                    LocalTime.of(8, 30);
+                    LocalTime.of(19, 30);
+                }}
+        ));
     }
 }

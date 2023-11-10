@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.ui.adapters;
+package com.szylas.medicamenttracker.ui.helpers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +29,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         public ViewHolder(View view) {
             super(view);
 
-            medNameView = (TextView) view.findViewById(R.id.medName);
-            medTimeView = (TextView) view.findViewById(R.id.medTime);
+            medNameView = view.findViewById(R.id.medName);
+            medTimeView = view.findViewById(R.id.medTime);
 
         }
 

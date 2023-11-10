@@ -5,4 +5,14 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainActivity">
 
+    <activity
+        android:id="@+id/addMedsActivity"
+        android:name="com.szylas.medicamenttracker.ui.activities.AddMedsActivity"
+        android:label="activity_add_meds"
+        tools:layout="@layout/activity_add_meds" />
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="com.szylas.medicamenttracker.ui.activities.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
