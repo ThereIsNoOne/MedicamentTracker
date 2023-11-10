@@ -1,6 +1,10 @@
 package com.szylas.medicamenttracker.models.meds;
 
+import androidx.annotation.NonNull;
+
 import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
+
+import java.util.Locale;
 
 public abstract class Medicament {
 
@@ -49,6 +53,7 @@ public abstract class Medicament {
         quantity -= dose;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return String.format("Type: %s, name: %s, dose: %d, quantity: %d", getClass(), name, dose, quantity);

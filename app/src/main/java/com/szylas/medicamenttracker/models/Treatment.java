@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
 import com.szylas.medicamenttracker.models.meds.Medicament;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Optional;
 public class Treatment implements Iterable<Medicament> {
 
     private ArrayList<Medicament> medications = new ArrayList<>();
-    private ArrayList<LocalTime> applicationTime = new ArrayList<>();
+    private ArrayList<LocalTime> applicationTime;
     private final LocalDate startDate;
 
     // May be null to indicate that there is no finish date and treatment should be
@@ -105,7 +104,7 @@ public class Treatment implements Iterable<Medicament> {
         return new ArrayList<MedTimePair<LocalTime, Medicament>>() {{
             for (LocalTime time: applicationTime) {
                 for (Medicament medicament: medications) {
-                    add(new MedTimePair(time, medicament));
+                    add(new MedTimePair<>(time, medicament));
                 }
             }
         }};

@@ -2,7 +2,7 @@ package com.szylas.medicamenttracker.datastore;
 
 import android.content.res.AssetManager;
 
-import com.szylas.medicamenttracker.builders.MedicamentBuilder;
+import com.szylas.medicamenttracker.builders.MedicamentFactory;
 import com.szylas.medicamenttracker.models.MedType;
 import com.szylas.medicamenttracker.models.meds.Medicament;
 import com.szylas.medicamenttracker.models.Treatment;
@@ -98,7 +98,7 @@ public final class TreatmentsReader {
             int volume = medicationValues.length == 5 ? Integer.parseInt(medicationValues[4]) : 0;
 
             medicationsArray.add(
-                    MedicamentBuilder.getMedicament(type, name, quantity, dose, volume)
+                    MedicamentFactory.getMedicament(type, name, quantity, dose, volume)
             );
         }
         return medicationsArray;

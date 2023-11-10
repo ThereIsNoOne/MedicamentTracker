@@ -2,6 +2,7 @@ package com.szylas.medicamenttracker.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
+import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.MedListAdapter;
+import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,10 +35,22 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        treatmentsManager = new TreatmentsManager(getAssets());
+        if (treatmentsManager == null) {
+            Log.d("MainActivityCreation", "Setting new treatment manager");
+            treatmentsManager = new TreatmentsManager(getAssets());
+            unpackIntent();
+        }
         medListAdapter = new MedListAdapter(treatmentsManager);
 
         setupMedRecyclerView();
+    }
+
+    private void unpackIntent() {
+        TreatmentParcel parcel = getIntent().getParcelableExtra(Literals.TREATMENT_PARCEL, TreatmentParcel.class);
+        if (parcel == null) {
+            return;
+        }
+        treatmentsManager.addNewTreatment(parcel.getTreatment());
     }
 
     private void setupMedRecyclerView() {
