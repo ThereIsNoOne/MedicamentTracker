@@ -6,7 +6,7 @@ import com.szylas.medicamenttracker.models.meds.Medicament;
 import com.szylas.medicamenttracker.models.meds.Pill;
 import com.szylas.medicamenttracker.models.meds.Syrup;
 
-public class MedicamentBuilder {
+public class MedicamentFactory {
     public static Medicament getMedicament(MedType type,
                                            String name,
                                            int quantity,
