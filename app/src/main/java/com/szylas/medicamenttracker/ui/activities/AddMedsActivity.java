@@ -45,8 +45,8 @@ public class AddMedsActivity extends AppCompatActivity {
             mainIntent.putExtra(Literals.TREATMENT_PARCEL, new TreatmentParcel(
                     LocalDateTime.of(2022, 11, 1, 0, 0).atZone(ZoneId.systemDefault()).toEpochSecond(),
                     LocalDateTime.of(2024, 11, 1, 0 ,0).atZone(ZoneId.systemDefault()).toEpochSecond(),
-                    new long[] {8*60+30, 12*60+30},
-                    new String[] {"PILL:IBum:30:1", "SYRUP:LevoPront:15:300:3"}
+                    new int[] {4*60+30, 12*60+30, 23*60},
+                    new String[] {"PILL:IBum:30:1", "SYRUP:LevoPront:15:300:3", "INJECTION:Insulin:70:1"}
             ));
 
             startActivity(mainIntent);

@@ -1,5 +1,8 @@
 package com.szylas.medicamenttracker.datastore;
 
+import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.determineType;
+import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.parseSingleMedicament;
+
 import android.content.res.AssetManager;
 
 import com.szylas.medicamenttracker.builders.MedicamentFactory;
@@ -13,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public final class TreatmentsReader {
@@ -63,7 +67,7 @@ public final class TreatmentsReader {
             finishDate = LocalDate.parse(values[1], FORMATTER);
         }
 
-        ArrayList<Medicament> medicament = parseMedicament(values[2]);
+        ArrayList<Medicament> medicament = parseMedicamentList(values[2]);
         ArrayList<LocalTime> applicationTime = parseApplicationTime(values[3]);
 
         return new Treatment(medicament, startDate, finishDate, applicationTime);
@@ -80,40 +84,21 @@ public final class TreatmentsReader {
         return timesArray;
     }
 
-    private static ArrayList<Medicament> parseMedicament(String value) {
+    private static ArrayList<Medicament> parseMedicamentList(String value) {
         String[] medications = value.split(",");
         ArrayList<Medicament> medicationsArray = new ArrayList<>();
 
         for (String medication : medications) {
-            String[] medicationValues = medication.split(":");
+            Optional<Medicament> med = parseSingleMedicament(medication);
 
-            if (medicationValues.length < 4) {
+            if (!med.isPresent()) {
                 continue;
             }
-
-            MedType type = determineType(medicationValues[0]);
-            String name = medicationValues[1];
-            int quantity = Integer.parseInt(medicationValues[2]);
-            int dose = Integer.parseInt(medicationValues[3]);
-            int volume = medicationValues.length == 5 ? Integer.parseInt(medicationValues[4]) : 0;
-
             medicationsArray.add(
-                    MedicamentFactory.getMedicament(type, name, quantity, dose, volume)
+                    med.get()
             );
         }
         return medicationsArray;
     }
 
-    private static MedType determineType(String medicationValue) {
-        switch (medicationValue) {
-            case "PILL":
-                return MedType.PILL;
-            case "SYRUP":
-                return MedType.SYRUP;
-            case "INJECTION":
-                return MedType.INJECTION;
-            default:
-                throw new IllegalStateException("Unknown MedType: " + medicationValue);
-        }
-    }
 }

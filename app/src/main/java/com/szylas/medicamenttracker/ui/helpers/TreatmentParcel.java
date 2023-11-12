@@ -12,14 +12,14 @@ public class TreatmentParcel implements Parcelable {
     private final long startDateTimestamp;
     private long endDateTimestamp;
     // In seconds from day start (0:00)
-    private long[] applicationTimes;
+    private int[] applicationTimes;
     private String[] medications;
 
 
     protected TreatmentParcel(Parcel in) {
         startDateTimestamp = in.readLong();
         endDateTimestamp = in.readLong();
-        applicationTimes = in.createLongArray();
+        applicationTimes = in.createIntArray();
         medications = in.createStringArray();
     }
 
@@ -35,7 +35,7 @@ public class TreatmentParcel implements Parcelable {
         }
     };
 
-    public TreatmentParcel(long startDateTimestamp, long endDateTimestamp, long[] applicationTimes, String[] medications) {
+    public TreatmentParcel(long startDateTimestamp, long endDateTimestamp, int[] applicationTimes, String[] medications) {
         this.startDateTimestamp = startDateTimestamp;
         this.endDateTimestamp = endDateTimestamp;
         this.applicationTimes = applicationTimes;
@@ -51,7 +51,7 @@ public class TreatmentParcel implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeLong(startDateTimestamp);
         parcel.writeLong(endDateTimestamp);
-        parcel.writeLongArray(applicationTimes);
+        parcel.writeIntArray(applicationTimes);
         parcel.writeStringArray(medications);
     }
 
