@@ -4,4 +4,6 @@
     <dimen name="item_height">70dp</dimen>
     <dimen name="button_width">144dp</dimen>
     <dimen name="button_height">48dp</dimen>
+    <dimen name="icon_button_dimen">48dp</dimen>
+
 </resources>

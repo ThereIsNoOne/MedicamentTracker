@@ -8,4 +8,7 @@
     </string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
+    <string name="add_button">Add</string>
+    <string name="hint_date">DD/MM/YYYY</string>
+    <string name="date_button_tip">Enter date</string>
 </resources>
