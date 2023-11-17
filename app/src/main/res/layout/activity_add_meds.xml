@@ -25,8 +25,75 @@
         android:id="@+id/add_meds_text"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_wrapper_add_meds_activity"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
         android:text="@string/test_text"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        style="?attr/materialIconButtonOutlinedStyle"
+        app:icon="@drawable/baseline_calendar_today_24"
+        android:id="@+id/start_date_picker"
+        app:layout_constraintTop_toBottomOf="@id/add_meds_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/start_date_field"
+        app:layout_constraintBottom_toBottomOf="@id/start_date_field"
+        android:layout_width="@dimen/icon_button_dimen"
+        android:layout_height="@dimen/icon_button_dimen"
+        android:layout_margin="@dimen/fab_margin"
+        android:tooltipText="@string/date_button_tip"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/start_date_field"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/start_date_picker"
+        app:layout_constraintTop_toBottomOf="@id/add_meds_text"
+        app:layout_constraintBottom_toTopOf="@id/add_meds_text2"
+        android:layout_width="0dp"
+        android:hint="@string/hint_date"
+        android:layout_height="@dimen/item_height"
+        android:layout_margin="@dimen/fab_margin"/>
+
+    <TextView
+        android:id="@+id/add_meds_text2"
+        app:layout_constraintTop_toBottomOf="@+id/start_date_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="@string/test_text"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="?attr/materialIconButtonOutlinedStyle"
+        app:icon="@drawable/baseline_calendar_today_24"
+        android:id="@+id/finish_date_picker"
+        app:layout_constraintTop_toBottomOf="@id/add_meds_text2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/finish_date_field"
+        app:layout_constraintBottom_toBottomOf="@id/finish_date_field"
+        android:layout_width="@dimen/icon_button_dimen"
+        android:layout_height="@dimen/icon_button_dimen"
+        android:layout_margin="@dimen/fab_margin"
+        android:tooltipText="@string/date_button_tip"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/finish_date_field"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/finish_date_picker"
+        app:layout_constraintTop_toBottomOf="@id/add_meds_text2"
+        android:layout_width="0dp"
+        android:hint="@string/hint_date"
+        android:layout_height="@dimen/item_height"
+        android:layout_margin="@dimen/fab_margin"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/add_single_med"
+        app:layout_constraintBottom_toTopOf="@id/ok_add_med_button"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="@string/add_button"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.ElevatedButton"

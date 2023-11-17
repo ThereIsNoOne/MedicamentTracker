@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if (parcel == null) {
             return;
         }
+        Log.d("PARCEL_INFO", String.valueOf(parcel.getTreatment().getMedTimePairs().size()));
         treatmentsManager.addNewTreatment(parcel.getTreatment());
     }
 
