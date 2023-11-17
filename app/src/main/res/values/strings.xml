@@ -11,4 +11,9 @@
     <string name="add_button">Add</string>
     <string name="hint_date">DD/MM/YYYY</string>
     <string name="date_button_tip">Enter date</string>
+    <string name="enter_start_date">Enter start date:</string>
+    <string name="enter_finish_date">Enter finish date:</string>
+    <string name="enter_application_time">Enter application time</string>
+    <string name="time_hint">HH:mm</string>
+    <string name="time_button_hint">Enter application time</string>
 </resources>

@@ -9,11 +9,12 @@ import com.szylas.medicamenttracker.builders.TreatmentBuilder;
 import com.szylas.medicamenttracker.models.Treatment;
 
 public class TreatmentParcel implements Parcelable {
+    // As EPOCH timestamp in milliseconds
     private final long startDateTimestamp;
-    private long endDateTimestamp;
-    // In seconds from day start (0:00)
-    private int[] applicationTimes;
-    private String[] medications;
+    private final long endDateTimestamp;
+    // In minutes from day start (0:00)
+    private final int[] applicationTimes;
+    private final String[] medications;
 
 
     protected TreatmentParcel(Parcel in) {

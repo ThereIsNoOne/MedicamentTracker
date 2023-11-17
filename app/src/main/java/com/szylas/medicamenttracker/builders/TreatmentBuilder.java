@@ -20,8 +20,11 @@ public final class TreatmentBuilder {
                                   int[] applicationTimes,
                                   String[] medications) {
 
-        LocalDate startDate = Instant.ofEpochSecond(startDateTimestamp).atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate endDate = Instant.ofEpochSecond(endDateTimestamp).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate startDate = Instant.ofEpochMilli(startDateTimestamp).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endDate = null;
+        if (endDateTimestamp != 0) {
+            endDate = Instant.ofEpochMilli(endDateTimestamp).atZone(ZoneId.systemDefault()).toLocalDate();
+        }
 
         ArrayList<LocalTime> applicationTimesList = parseLongArray(applicationTimes);
         ArrayList<Medicament> medsList = parseMedsArray(medications);
