@@ -8,7 +8,7 @@
     </string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
-    <string name="add_button">Add</string>
+    <string name="add_button">Manage meds</string>
     <string name="hint_date">DD/MM/YYYY</string>
     <string name="date_button_tip">Enter date</string>
     <string name="enter_start_date">Enter start date:</string>
@@ -16,4 +16,6 @@
     <string name="enter_application_time">Enter application time</string>
     <string name="time_hint">HH:mm</string>
     <string name="time_button_hint">Enter application time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

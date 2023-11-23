@@ -21,108 +21,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/add_meds_text"
-        app:layout_constraintTop_toTopOf="@+id/start_date_field"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/start_date_field"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/enter_start_date"/>
-
-
-    <com.google.android.material.button.MaterialButton
-        style="?attr/materialIconButtonOutlinedStyle"
-        app:icon="@drawable/baseline_calendar_today_24"
-        android:id="@+id/start_date_picker"
-        app:layout_constraintTop_toTopOf="@id/start_date_field"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/start_date_field"
-        android:layout_width="@dimen/icon_button_dimen"
-        android:layout_height="@dimen/icon_button_dimen"
-        android:layout_margin="@dimen/fab_margin"
-        android:tooltipText="@string/date_button_tip"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/start_date_field"
-        app:layout_constraintRight_toLeftOf="@id/start_date_picker"
-        app:layout_constraintLeft_toRightOf="@id/add_meds_text"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/time_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:name="com.szylas.medicamenttracker.ui.fragments.DateTimeFragment"
         app:layout_constraintTop_toBottomOf="@id/toolbar_wrapper_add_meds_activity"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:hint="@string/hint_date"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/add_meds_text2"
-        app:layout_constraintTop_toTopOf="@+id/finish_date_field"
-        app:layout_constraintBottom_toBottomOf="@id/finish_date_field"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/enter_finish_date"/>
-
-    <com.google.android.material.button.MaterialButton
-        style="?attr/materialIconButtonOutlinedStyle"
-        app:icon="@drawable/baseline_calendar_today_24"
-        android:id="@+id/finish_date_picker"
-        app:layout_constraintTop_toTopOf="@id/finish_date_field"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/finish_date_field"
-        android:layout_width="@dimen/icon_button_dimen"
-        android:layout_height="@dimen/icon_button_dimen"
-        android:layout_margin="@dimen/fab_margin"
-        android:tooltipText="@string/date_button_tip"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/finish_date_field"
-        app:layout_constraintLeft_toRightOf="@id/add_meds_text2"
-        app:layout_constraintRight_toLeftOf="@id/finish_date_picker"
-        app:layout_constraintTop_toBottomOf="@id/start_date_field"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:hint="@string/hint_date"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/add_meds_time"
-        app:layout_constraintTop_toTopOf="@+id/application_time_field"
-        app:layout_constraintBottom_toBottomOf="@id/application_time_field"
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/enter_application_time"/>
-
-    <com.google.android.material.button.MaterialButton
-        style="?attr/materialIconButtonOutlinedStyle"
-        app:icon="@drawable/baseline_add_alarm_24"
-        android:id="@+id/application_time_picker"
-        app:layout_constraintTop_toTopOf="@id/application_time_field"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/application_time_field"
-        android:layout_width="@dimen/icon_button_dimen"
-        android:layout_height="@dimen/icon_button_dimen"
-        android:layout_margin="@dimen/fab_margin"
-        android:tooltipText="@string/time_hint"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/application_time_field"
-        app:layout_constraintLeft_toRightOf="@id/add_meds_time"
-        app:layout_constraintRight_toLeftOf="@id/application_time_picker"
-        app:layout_constraintTop_toBottomOf="@id/finish_date_field"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:hint="@string/time_hint"
-        android:layout_height="@dimen/item_height"
-        android:layout_margin="@dimen/fab_margin"/>
+        app:layout_constraintBottom_toTopOf="@id/add_single_med"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        />
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.ElevatedButton"
@@ -153,5 +61,6 @@
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/fab_margin"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

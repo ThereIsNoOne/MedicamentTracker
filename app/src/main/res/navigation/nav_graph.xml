@@ -11,8 +11,18 @@
         android:label="activity_add_meds"
         tools:layout="@layout/activity_add_meds" />
     <activity
-        android:id="@+id/mainActivity2"
+        android:id="@+id/mainActivity"
         android:name="com.szylas.medicamenttracker.ui.activities.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/dateTimeFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.DateTimeFragment"
+        android:label="fragment_date_time"
+        tools:layout="@layout/fragment_date_time" />
+    <fragment
+        android:id="@+id/medsFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.MedsFragment"
+        android:label="fragment_meds"
+        tools:layout="@layout/fragment_meds" />
 </navigation>

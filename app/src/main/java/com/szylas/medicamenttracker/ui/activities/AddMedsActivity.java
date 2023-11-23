@@ -7,6 +7,7 @@ import static com.szylas.medicamenttracker.ui.helpers.ParcelPacker.packTimesToAr
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,13 +22,15 @@ import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
+import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 public class AddMedsActivity extends AppCompatActivity {
+
+    private AddMedsViewModel viewModel;
 
     long[] dates = new long[2];
     List<Integer> times = new LinkedList<>();
@@ -45,12 +48,20 @@ public class AddMedsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setStartDatePicker();
-        setFinishDatePicker();
-        setApplicationDatePicker();
+
+
+        setViewModel();
         setButtonsActions();
 
     }
+
+    private void setViewModel() {
+        viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
+        viewModel.getSelectedTime().observe(this, item -> times.add(item));
+        viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
+        viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
+    }
+
 
     private void setApplicationDatePicker() {
         MaterialTimePicker timePicker = new MaterialTimePicker.Builder()

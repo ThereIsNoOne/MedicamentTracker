@@ -14,7 +14,7 @@ import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
-import com.szylas.medicamenttracker.ui.helpers.MedListAdapter;
+import com.szylas.medicamenttracker.ui.adapters.MedListAdapter;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 
 public class MainActivity extends AppCompatActivity {

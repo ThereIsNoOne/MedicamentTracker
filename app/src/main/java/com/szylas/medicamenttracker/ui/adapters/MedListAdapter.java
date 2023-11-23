@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.ui.helpers;
+package com.szylas.medicamenttracker.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
