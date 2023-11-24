@@ -26,6 +26,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         private final TextView medNameView;
         private final TextView medTimeView;
 
+        private int index;
+
         public ViewHolder(View view) {
             super(view);
 
@@ -41,6 +43,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         public TextView getTimeTextView() {
             return medTimeView;
         }
+
     }
 
     public MedListAdapter(TreatmentsManager treatmentsManager) {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/dateTimeFragment">
 
     <activity
         android:id="@+id/addMedsActivity"
@@ -19,10 +19,18 @@
         android:id="@+id/dateTimeFragment"
         android:name="com.szylas.medicamenttracker.ui.fragments.DateTimeFragment"
         android:label="fragment_date_time"
-        tools:layout="@layout/fragment_date_time" />
+        tools:layout="@layout/fragment_date_time" >
+        <action
+            android:id="@+id/action_dateTimeFragment_to_medsFragment"
+            app:destination="@id/medsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/medsFragment"
         android:name="com.szylas.medicamenttracker.ui.fragments.MedsFragment"
         android:label="fragment_meds"
-        tools:layout="@layout/fragment_meds" />
+        tools:layout="@layout/fragment_meds" >
+        <action
+            android:id="@+id/action_medsFragment_to_dateTimeFragment"
+            app:destination="@id/dateTimeFragment" />
+    </fragment>
 </navigation>

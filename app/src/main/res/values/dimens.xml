@@ -5,5 +5,7 @@
     <dimen name="button_width">144dp</dimen>
     <dimen name="button_height">48dp</dimen>
     <dimen name="icon_button_dimen">48dp</dimen>
+    <dimen name="headline">24sp</dimen>
+    <dimen name="divider_height">2dp</dimen>
 
 </resources>

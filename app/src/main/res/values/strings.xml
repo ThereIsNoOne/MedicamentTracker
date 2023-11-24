@@ -16,6 +16,14 @@
     <string name="enter_application_time">Enter application time</string>
     <string name="time_hint">HH:mm</string>
     <string name="time_button_hint">Enter application time</string>
+    <string name="delete_button">Remove</string>
+    <string name="manage_times">Manage dates</string>
+    <string name="add_med_name">Insert medication name</string>
+    <string name="med_name_hint">Medication name</string>
+    <string name="med_type_hint">Medication type</string>
+    <string name="med_quantity_hint">Quantity</string>
+    <string name="med_dose_hint">Dose</string>
+    <string name="med_volume_hint">Volume</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

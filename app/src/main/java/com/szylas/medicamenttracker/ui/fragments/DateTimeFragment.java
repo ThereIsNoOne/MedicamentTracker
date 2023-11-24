@@ -8,17 +8,25 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
+import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
+import com.szylas.medicamenttracker.ui.adapters.TimeListAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
 
@@ -27,6 +35,7 @@ public class DateTimeFragment extends Fragment {
 
     private View view;
     private AddMedsViewModel viewModel;
+
 
     private void setApplicationTimePicker() {
         MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
@@ -103,13 +112,34 @@ public class DateTimeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_date_time, container, false);
     }
 
+    private void setRecyclerView() {
+        RecyclerView timeRecyclerView = view.findViewById(R.id.time_list);
+        TimeListAdapter adapter = ((AddMedsActivity) DateTimeFragment.this.getActivity())
+                .getTimeListAdapter();
+        if (adapter == null) {
+            adapter = new TimeListAdapter();
+            Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
+        }
+        timeRecyclerView.setAdapter(adapter);
+        timeRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.view = view;
         viewModel = new ViewModelProvider(requireActivity()).get(AddMedsViewModel.class);
+        setRecyclerView();
         setApplicationTimePicker();
         setFinishDatePicker();
         setStartDatePicker();
-
+        setButton();
     }
+
+    private void setButton() {
+        MaterialButton accept = view.findViewById(R.id.add_single_med);
+        accept.setOnClickListener(view1 -> Navigation.findNavController(view).navigate(
+                R.id.action_dateTimeFragment_to_medsFragment));
+    }
+
+
 }

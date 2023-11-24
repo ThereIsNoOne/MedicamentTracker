@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.MedsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/add_med_name_textview"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        android:text="@string/add_med_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="@dimen/headline"
+        android:gravity="center"
+        android:textFontWeight="700"
+        android:layout_margin="@dimen/fab_margin"/>
 
-</FrameLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        android:id="@+id/add_med_name_input"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_med_name_textview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:gravity="center"
+        android:hint="@string/med_name_hint"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:id="@+id/med_type_combo_box"
+        app:layout_constraintTop_toBottomOf="@id/add_med_name_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:hint="@string/med_type_hint">
+
+        <AutoCompleteTextView
+            android:id="@+id/med_type_combo_box_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:id="@+id/quantity_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_type_combo_box"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/dose_input"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="3"
+        android:hint="@string/med_quantity_hint"
+        android:enabled="false"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/dose_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_type_combo_box"
+        app:layout_constraintLeft_toRightOf="@id/quantity_input"
+        app:layout_constraintRight_toLeftOf="@id/volume_input"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="5"
+        android:hint="@string/med_dose_hint"
+        android:enabled="false"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/volume_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_type_combo_box"
+        app:layout_constraintLeft_toRightOf="@id/dose_input"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="5"
+        android:hint="@string/med_volume_hint"
+        android:enabled="false"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        app:layout_constraintTop_toBottomOf="@id/dose_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/fab_margin"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/manage_dates_button"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/manage_times"
+        android:layout_margin="@dimen/fab_margin"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

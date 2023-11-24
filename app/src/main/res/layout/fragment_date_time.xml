@@ -112,7 +112,7 @@
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/divider_height"
         app:layout_constraintTop_toBottomOf="@id/application_time_field"
         app:layout_constraintBottom_toTopOf="@id/time_list"
         app:layout_constraintRight_toRightOf="parent"
@@ -126,8 +126,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_single_med"
         android:layout_margin="@dimen/fab_margin" />
 
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/add_single_med"
+        app:layout_constraintTop_toBottomOf="@id/time_list"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="@string/add_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

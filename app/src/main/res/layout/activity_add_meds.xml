@@ -25,22 +25,14 @@
         android:id="@+id/time_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:name="com.szylas.medicamenttracker.ui.fragments.DateTimeFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintTop_toBottomOf="@id/toolbar_wrapper_add_meds_activity"
-        app:layout_constraintBottom_toTopOf="@id/add_single_med"
+        app:layout_constraintBottom_toTopOf="@id/ok_add_med_button"
+        tools:layout = "@layout/fragment_date_time"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         />
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:id="@+id/add_single_med"
-        app:layout_constraintBottom_toTopOf="@id/ok_add_med_button"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_height"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/add_button"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.ElevatedButton"
