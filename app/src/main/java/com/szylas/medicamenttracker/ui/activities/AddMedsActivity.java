@@ -1,8 +1,5 @@
 package com.szylas.medicamenttracker.ui.activities;
 
-import static android.text.format.DateFormat.is24HourFormat;
-import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseDateToString;
-import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseTimeToString;
 import static com.szylas.medicamenttracker.ui.helpers.ParcelPacker.packTimesToArray;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.textview.MaterialTextView;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
-import com.szylas.medicamenttracker.ui.adapters.TimeListAdapter;
+import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
@@ -31,8 +24,7 @@ import java.util.Objects;
 
 public class AddMedsActivity extends AppCompatActivity {
 
-    private AddMedsViewModel viewModel;
-    private TimeListAdapter timeListAdapter;
+    private AddTimesAdapter timeListAdapter;
 
     long[] dates = new long[2];
     List<Integer> times = new LinkedList<>();
@@ -50,14 +42,14 @@ public class AddMedsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        timeListAdapter = new TimeListAdapter();
+        timeListAdapter = new AddTimesAdapter();
         setViewModel();
         setButtonsActions();
 
     }
 
     private void setViewModel() {
-        viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
+        AddMedsViewModel viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
         viewModel.getSelectedTime().observe(this, item -> timeListAdapter.addTime(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
@@ -103,7 +95,7 @@ public class AddMedsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public TimeListAdapter getTimeListAdapter() {
+    public AddTimesAdapter getAddTimesAdapter() {
         return timeListAdapter;
     }
 }

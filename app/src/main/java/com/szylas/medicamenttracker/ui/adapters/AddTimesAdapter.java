@@ -1,7 +1,6 @@
 package com.szylas.medicamenttracker.ui.adapters;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHolder> {
+public class AddTimesAdapter extends RecyclerView.Adapter<AddTimesAdapter.ViewHolder> {
 
     private final List<Integer> timeList;
-    private final Consumer<Integer> itemRemoved;
+    private final Consumer<Integer> atItemRemoved;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,9 +47,9 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
         }
     }
 
-    public TimeListAdapter() {
+    public AddTimesAdapter() {
         timeList = new LinkedList<>();
-        itemRemoved = position -> {
+        atItemRemoved = position -> {
             timeList.remove(timeList.get(position));
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, timeList.size());
@@ -59,7 +58,7 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
 
     @NonNull
     @Override
-    public TimeListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.time_item, parent, false);
@@ -68,8 +67,8 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TimeListAdapter.ViewHolder holder, int position) {
-        holder.bind(timeList.get(position), itemRemoved);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(timeList.get(position), atItemRemoved);
     }
 
     @Override

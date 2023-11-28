@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +25,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
-import com.szylas.medicamenttracker.ui.adapters.TimeListAdapter;
+import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
 
@@ -114,10 +113,10 @@ public class DateTimeFragment extends Fragment {
 
     private void setRecyclerView() {
         RecyclerView timeRecyclerView = view.findViewById(R.id.time_list);
-        TimeListAdapter adapter = ((AddMedsActivity) DateTimeFragment.this.getActivity())
-                .getTimeListAdapter();
+        AddTimesAdapter adapter = ((AddMedsActivity) DateTimeFragment.this.getActivity())
+                .getAddTimesAdapter();
         if (adapter == null) {
-            adapter = new TimeListAdapter();
+            adapter = new AddTimesAdapter();
             Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
         }
         timeRecyclerView.setAdapter(adapter);

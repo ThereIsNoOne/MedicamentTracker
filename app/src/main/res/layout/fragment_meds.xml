@@ -104,6 +104,14 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        app:layout_constraintBottom_toTopOf="@id/manage_dates_button"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/add_med_button_text"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.ElevatedButton"
         android:id="@+id/manage_dates_button"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
