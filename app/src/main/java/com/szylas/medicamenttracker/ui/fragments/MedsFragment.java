@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.models.MedType;
+import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
+import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
+import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.InputType;
 
 import java.util.HashMap;
@@ -50,9 +55,22 @@ public class MedsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle bundle) {
         this.view = view;
+        setRecyclerView();
         findInputs();
         setBackButton();
         setComboBox();
+    }
+
+    private void setRecyclerView() {
+        RecyclerView recyclerView = view.findViewById(R.id.add_meds_recycler_view);
+        AddMedsAdapter adapter = ((AddMedsActivity) MedsFragment.this.getActivity())
+                .getAddMedsAdapter();
+        if (adapter == null) {
+            adapter = new AddMedsAdapter();
+            Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
+        }
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
     private void findInputs() {

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.szylas.medicamenttracker.R;
+import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
@@ -24,7 +25,8 @@ import java.util.Objects;
 
 public class AddMedsActivity extends AppCompatActivity {
 
-    private AddTimesAdapter timeListAdapter;
+    private AddTimesAdapter addTimesAdapter;
+    private AddMedsAdapter addMedsAdapter;
 
     long[] dates = new long[2];
     List<Integer> times = new LinkedList<>();
@@ -42,7 +44,8 @@ public class AddMedsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        timeListAdapter = new AddTimesAdapter();
+        addTimesAdapter = new AddTimesAdapter();
+        addMedsAdapter = new AddMedsAdapter();
         setViewModel();
         setButtonsActions();
 
@@ -50,7 +53,7 @@ public class AddMedsActivity extends AppCompatActivity {
 
     private void setViewModel() {
         AddMedsViewModel viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
-        viewModel.getSelectedTime().observe(this, item -> timeListAdapter.addTime(item));
+        viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addTime(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
     }
@@ -79,7 +82,7 @@ public class AddMedsActivity extends AppCompatActivity {
         mainIntent.putExtra(Literals.TREATMENT_PARCEL, new TreatmentParcel(
                 dates[0],
                 dates[1],
-                packTimesToArray(timeListAdapter.getTimeList()),
+                packTimesToArray(addTimesAdapter.getTimeList()),
                 new String[]{"PILL:IBum:30:1", "SYRUP:LevoPront:15:300:3", "INJECTION:Insulin:70:1"}
                 ));
 
@@ -96,6 +99,10 @@ public class AddMedsActivity extends AppCompatActivity {
     }
 
     public AddTimesAdapter getAddTimesAdapter() {
-        return timeListAdapter;
+        return addTimesAdapter;
+    }
+
+    public AddMedsAdapter getAddMedsAdapter() {
+        return addMedsAdapter;
     }
 }
