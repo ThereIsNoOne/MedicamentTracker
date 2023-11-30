@@ -1,5 +1,6 @@
 package com.szylas.medicamenttracker.ui.activities;
 
+import static com.szylas.medicamenttracker.ui.helpers.ParcelPacker.packMedsToArray;
 import static com.szylas.medicamenttracker.ui.helpers.ParcelPacker.packTimesToArray;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +57,7 @@ public class AddMedsActivity extends AppCompatActivity {
         viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addTime(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
+        viewModel.getSelectedMed().observe(this, item -> addMedsAdapter.addMed(item));
     }
 
     private void setButtonsActions() {
@@ -83,8 +85,8 @@ public class AddMedsActivity extends AppCompatActivity {
                 dates[0],
                 dates[1],
                 packTimesToArray(addTimesAdapter.getTimeList()),
-                new String[]{"PILL:IBum:30:1", "SYRUP:LevoPront:15:300:3", "INJECTION:Insulin:70:1"}
-                ));
+                packMedsToArray(addMedsAdapter.getMedsList())
+        ));
 
         startActivity(mainIntent);
     }

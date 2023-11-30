@@ -8,7 +8,16 @@ public class AddMedsViewModel extends ViewModel {
     private final MutableLiveData<Integer> selectedApplicationTime = new MutableLiveData<>();
     private final MutableLiveData<Long> selectedStartDate = new MutableLiveData<>();
     private final MutableLiveData<Long> selectedFinishDate = new MutableLiveData<>();
+    private final MutableLiveData<String> selectedMed = new MutableLiveData<>();
 
+
+    public void setSelectedMed(String item) {
+        selectedMed.postValue(item);
+    }
+
+    public LiveData<String> getSelectedMed() {
+        return selectedMed;
+    }
 
     public void setSelectTime(Integer time) {
         selectedApplicationTime.setValue(time);
