@@ -15,9 +15,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TreatmentsManager {
-    /**
-     * Stores treatments, as a map where treatment is value and starting date is the key.
-     */
     private ArrayList<Treatment> treatmentsList = new ArrayList<>();
 
     public TreatmentsManager(AssetManager assets) {

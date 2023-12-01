@@ -30,8 +30,6 @@ public class AddMedsActivity extends AppCompatActivity {
     private AddMedsAdapter addMedsAdapter;
 
     long[] dates = new long[2];
-    List<Integer> times = new LinkedList<>();
-    List<String> meds = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,9 +19,7 @@ import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ActivityMainBinding binding;
-
 
     private MedListAdapter medListAdapter;
     private TreatmentsManager treatmentsManager;
@@ -35,23 +33,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        if (treatmentsManager == null) {
-            Log.d("MainActivityCreation", "Setting new treatment manager");
-            treatmentsManager = new TreatmentsManager(getAssets());
-            unpackIntent();
-        }
-        medListAdapter = new MedListAdapter(treatmentsManager);
 
+
+        setupMedListAdapter();
         setupMedRecyclerView();
     }
 
-    private void unpackIntent() {
-        TreatmentParcel parcel = getIntent().getParcelableExtra(Literals.TREATMENT_PARCEL, TreatmentParcel.class);
-        if (parcel == null) {
-            return;
-        }
-        Log.d("PARCEL_INFO", String.valueOf(parcel.getTreatment().getMedTimePairs().size()));
-        treatmentsManager.addNewTreatment(parcel.getTreatment());
+    private void setupMedListAdapter() {
+        Thread loadData = new Thread(this::run);
+
     }
 
     private void setupMedRecyclerView() {
@@ -63,16 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -89,5 +75,14 @@ public class MainActivity extends AppCompatActivity {
     private void startMedAddActivity() {
         Intent intent = new Intent(MainActivity.this, AddMedsActivity.class);
         startActivity(intent);
+    }
+
+    private void run() {
+        treatmentsManager = new TreatmentsManager(getAssets());
+        TreatmentParcel parcel;
+        if ((parcel = getIntent().getParcelableExtra(Literals.TREATMENT_PARCEL, TreatmentParcel.class)) != null) {
+            treatmentsManager.addNewTreatment(parcel.getTreatment());
+        }
+        medListAdapter = new MedListAdapter(treatmentsManager);
     }
 }
