@@ -2,9 +2,10 @@ package com.szylas.medicamenttracker.computation;
 
 import static com.szylas.medicamenttracker.computation.helpers.Sorter.sort;
 
-import android.content.res.AssetManager;
+import android.content.Context;
 
-import com.szylas.medicamenttracker.datastore.*;
+import com.szylas.medicamenttracker.datastore.TreatmentsReader;
+import com.szylas.medicamenttracker.datastore.TreatmentsWriter;
 import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.models.meds.Medicament;
@@ -16,11 +17,11 @@ import java.util.ArrayList;
 
 public class TreatmentsManager {
     private final ArrayList<Treatment> treatmentsList = new ArrayList<>();
-    private final AssetManager assets;
+    private final Context context;
 
-    public TreatmentsManager(AssetManager assets) {
-        this.assets = assets;
-        treatmentsList.addAll(TreatmentsReader.loadTreatments(assets));
+    public TreatmentsManager(Context context) {
+        this.context = context;
+        treatmentsList.addAll(TreatmentsReader.load(context));
     }
 
     public ArrayList<MedTimePair<LocalTime, Medicament>> treatmentsForDay(LocalDate date) {
@@ -44,18 +45,7 @@ public class TreatmentsManager {
     }
 
     public void saveTreatments() {
-        TreatmentsWriter.save(treatmentsList, assets);
+        TreatmentsWriter.save(treatmentsList, context);
     }
 
-    public void testPut() {
-        treatmentsList.add(new Treatment(
-                new Pill("Test", 30, 1),
-                LocalDate.of(2022, 11, 1),
-                LocalDate.of(2024, 11, 1),
-                new ArrayList<LocalTime>() {{
-                    LocalTime.of(8, 30);
-                    LocalTime.of(19, 30);
-                }}
-        ));
-    }
 }

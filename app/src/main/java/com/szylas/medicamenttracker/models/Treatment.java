@@ -14,6 +14,14 @@ import java.util.Optional;
 
 public class Treatment implements Iterable<Medicament> {
 
+    public ArrayList<Medicament> getMedications() {
+        return medications;
+    }
+
+    public ArrayList<LocalTime> getApplicationTime() {
+        return applicationTime;
+    }
+
     private ArrayList<Medicament> medications = new ArrayList<>();
     private ArrayList<LocalTime> applicationTime;
     private final LocalDate startDate;

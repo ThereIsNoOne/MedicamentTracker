@@ -18,6 +18,9 @@ public abstract class Medicament {
         return dose;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
     public String getName() {
         return name;
     }

@@ -39,4 +39,8 @@ public class Syrup extends Medicament {
         }
         volume += increasingVolume;
     }
+
+    public int getVolume() {
+        return volume;
+    }
 }

@@ -3,19 +3,29 @@ package com.szylas.medicamenttracker.datastore;
 import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.determineType;
 import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.parseSingleMedicament;
 
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import com.szylas.medicamenttracker.builders.MedicamentFactory;
 import com.szylas.medicamenttracker.models.MedType;
 import com.szylas.medicamenttracker.models.meds.Medicament;
 import com.szylas.medicamenttracker.models.Treatment;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -25,6 +35,37 @@ public final class TreatmentsReader {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private TreatmentsReader() {
 
+    }
+
+    public static List<Treatment> load(Context context) {
+        List<Treatment> treatments = new ArrayList<>();
+        File file = new File(context.getFilesDir(), PATH);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput(PATH)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("#")) {
+                    continue;
+                }
+                String[] values = line.split(";");
+                if (values.length != 4) {
+                    continue;
+                }
+
+                Treatment treatment = getTreatment(values);
+                treatments.add(treatment);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return treatments;
     }
 
     public static ArrayList<Treatment> loadTreatments(AssetManager assets) {
@@ -78,7 +119,10 @@ public final class TreatmentsReader {
         ArrayList<LocalTime> timesArray = new ArrayList<>();
 
         for (String time : times) {
-            timesArray.add(LocalTime.parse(time));
+            String[] timeVal = time.split(":");
+            int hour = Integer.parseInt(timeVal[0]);
+            int minute = Integer.parseInt(timeVal[1]);
+            timesArray.add(LocalTime.of(hour, minute));
         }
 
         return timesArray;

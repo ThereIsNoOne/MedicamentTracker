@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void run() {
-        TreatmentsManager treatmentsManager = new TreatmentsManager(getAssets());
+        TreatmentsManager treatmentsManager = new TreatmentsManager(this);
         TreatmentParcel parcel;
         Log.d("Treatment manager", "Initiallizing treatment manager");
         if ((parcel = getIntent().getParcelableExtra(Literals.TREATMENT_PARCEL, TreatmentParcel.class)) != null) {
