@@ -16,8 +16,10 @@ import java.util.ArrayList;
 
 public class TreatmentsManager {
     private final ArrayList<Treatment> treatmentsList = new ArrayList<>();
+    private final AssetManager assets;
 
     public TreatmentsManager(AssetManager assets) {
+        this.assets = assets;
         treatmentsList.addAll(TreatmentsReader.loadTreatments(assets));
     }
 
@@ -42,7 +44,7 @@ public class TreatmentsManager {
     }
 
     public void saveTreatments() {
-        TreatmentsWriter.save(treatmentsList);
+        TreatmentsWriter.save(treatmentsList, assets);
     }
 
     public void testPut() {
