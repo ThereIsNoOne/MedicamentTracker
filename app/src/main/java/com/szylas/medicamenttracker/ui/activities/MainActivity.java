@@ -1,7 +1,5 @@
 package com.szylas.medicamenttracker.ui.activities;
 
-import static java.lang.Thread.sleep;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.databinding.ActivityMainBinding;
-import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.adapters.MedListAdapter;
+import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,6 +88,6 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             setupMedRecyclerView();
         });
-
+        treatmentsManager.saveTreatments();
     }
 }

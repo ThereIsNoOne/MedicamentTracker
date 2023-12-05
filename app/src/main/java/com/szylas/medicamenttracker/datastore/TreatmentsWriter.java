@@ -1,5 +1,11 @@
 package com.szylas.medicamenttracker.datastore;
 
+import android.util.Log;
+
+import com.szylas.medicamenttracker.models.Treatment;
+
+import java.util.List;
+
 public final class TreatmentsWriter {
 
     private static final String PREAMBLE = "# Treatments are stored in this file in following format\n" +
@@ -11,11 +17,11 @@ public final class TreatmentsWriter {
             "\n" +
             "# WARNING: Do NOT change this file, it may (and probably will) cause app to stop working!";
 
-    private TreatmentsWriter() {
-
+    public static void save(List<Treatment> treatments) {
+        Log.d("SAVING", String.format("Saving list of length %d", treatments.size()));
     }
 
-    public void Save() {
+    private TreatmentsWriter() {
 
     }
 

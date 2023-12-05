@@ -4,7 +4,7 @@ import static com.szylas.medicamenttracker.computation.helpers.Sorter.sort;
 
 import android.content.res.AssetManager;
 
-import com.szylas.medicamenttracker.datastore.TreatmentsReader;
+import com.szylas.medicamenttracker.datastore.*;
 import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.models.meds.Medicament;
@@ -42,7 +42,7 @@ public class TreatmentsManager {
     }
 
     public void saveTreatments() {
-
+        TreatmentsWriter.save(treatmentsList);
     }
 
     public void testPut() {
