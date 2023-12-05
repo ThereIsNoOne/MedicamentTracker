@@ -15,7 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TreatmentsManager {
-    private ArrayList<Treatment> treatmentsList = new ArrayList<>();
+    private final ArrayList<Treatment> treatmentsList = new ArrayList<>();
 
     public TreatmentsManager(AssetManager assets) {
         treatmentsList.addAll(TreatmentsReader.loadTreatments(assets));
@@ -39,6 +39,10 @@ public class TreatmentsManager {
 
     public void addNewTreatment(Treatment treatment) {
         treatmentsList.add(treatment);
+    }
+
+    public void saveTreatments() {
+
     }
 
     public void testPut() {

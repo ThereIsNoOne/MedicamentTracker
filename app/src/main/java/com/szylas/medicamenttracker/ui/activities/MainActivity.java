@@ -1,10 +1,13 @@
 package com.szylas.medicamenttracker.ui.activities;
 
+import static java.lang.Thread.sleep;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,33 +22,31 @@ import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
     private MedListAdapter medListAdapter;
-    private TreatmentsManager treatmentsManager;
+    private RecyclerView medRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.szylas.medicamenttracker.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
 
 
 
+        medRecyclerView = findViewById(R.id.med_recycler_view);
         setupMedListAdapter();
-        setupMedRecyclerView();
     }
 
     private void setupMedListAdapter() {
+        medRecyclerView.setVisibility(View.GONE);
         Thread loadData = new Thread(this::run);
-
+        loadData.start();
     }
 
     private void setupMedRecyclerView() {
-        RecyclerView medRecyclerView = findViewById(R.id.med_recycler_view);
 
         medRecyclerView.setAdapter(medListAdapter);
         medRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.add_meds) {
@@ -78,11 +78,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void run() {
-        treatmentsManager = new TreatmentsManager(getAssets());
+        TreatmentsManager treatmentsManager = new TreatmentsManager(getAssets());
         TreatmentParcel parcel;
+        Log.d("Treatment manager", "Initiallizing treatment manager");
         if ((parcel = getIntent().getParcelableExtra(Literals.TREATMENT_PARCEL, TreatmentParcel.class)) != null) {
             treatmentsManager.addNewTreatment(parcel.getTreatment());
         }
         medListAdapter = new MedListAdapter(treatmentsManager);
+        runOnUiThread(() -> {
+            medRecyclerView.setVisibility(View.VISIBLE);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            setupMedRecyclerView();
+        });
+
     }
 }

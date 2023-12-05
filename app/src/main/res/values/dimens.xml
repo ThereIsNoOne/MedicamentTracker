@@ -8,4 +8,5 @@
     <dimen name="headline">24sp</dimen>
     <dimen name="divider_height">2dp</dimen>
     <dimen name="combo_box_height">70dp</dimen>
+    <dimen name="margin_progress">30dp</dimen>
 </resources>

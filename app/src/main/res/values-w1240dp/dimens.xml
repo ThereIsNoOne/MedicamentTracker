@@ -2,4 +2,5 @@
     <dimen name="fab_margin">200dp</dimen>
     <dimen name="headline">24sp</dimen>
     <dimen name="divider_height">2dp</dimen>
+    <dimen name="margin_progress">30dp</dimen>
 </resources>
