@@ -14,6 +14,8 @@ import com.szylas.medicamenttracker.models.meds.Pill;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TreatmentsManager {
     private final ArrayList<Treatment> treatmentsList = new ArrayList<>();
@@ -45,7 +47,10 @@ public class TreatmentsManager {
     }
 
     public void saveTreatments() {
-        TreatmentsWriter.save(treatmentsList, context);
+        List<Treatment> currentTreatments = treatmentsList.stream()
+                        .filter(item -> item.getFinishDate().orElse(LocalDate.MAX).isAfter(LocalDate.now()))
+                        .collect(Collectors.toList());
+        TreatmentsWriter.save(currentTreatments, context);
     }
 
 }
