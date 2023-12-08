@@ -20,8 +20,6 @@ import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
 public class AddMedsActivity extends AppCompatActivity {
@@ -52,10 +50,10 @@ public class AddMedsActivity extends AppCompatActivity {
 
     private void setViewModel() {
         AddMedsViewModel viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
-        viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addTime(item));
+        viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addItem(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
-        viewModel.getSelectedMed().observe(this, item -> addMedsAdapter.addMed(item));
+        viewModel.getSelectedMed().observe(this, item -> addMedsAdapter.addItem(item));
     }
 
     private void setButtonsActions() {
@@ -82,8 +80,8 @@ public class AddMedsActivity extends AppCompatActivity {
         mainIntent.putExtra(Literals.TREATMENT_PARCEL, new TreatmentParcel(
                 dates[0],
                 dates[1],
-                packTimesToArray(addTimesAdapter.getTimeList()),
-                packMedsToArray(addMedsAdapter.getMedsList())
+                packTimesToArray(addTimesAdapter.getDataList()),
+                packMedsToArray(addMedsAdapter.getDataList())
         ));
 
         startActivity(mainIntent);
