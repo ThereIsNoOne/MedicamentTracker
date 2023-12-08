@@ -37,7 +37,7 @@ public class MedsFragment extends Fragment {
     private View view;
     private AddMedsViewModel model;
 
-    private Map<InputType, TextInputEditText> inputs = new HashMap<>();
+    private final Map<InputType, TextInputEditText> inputs = new HashMap<>();
     private MedType currentItem;
     private TextInputEditText medName;
 

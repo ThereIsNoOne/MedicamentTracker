@@ -2,7 +2,6 @@ package com.szylas.medicamenttracker.ui.helpers;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.szylas.medicamenttracker.models.MedType;
@@ -11,6 +10,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
 
 public final class InputParser {
     public static String parseDateToString(long timestamp) {
@@ -33,18 +33,18 @@ public final class InputParser {
         String doseStr;
         String volumeStr;
         try {
-            quantityStr = String.valueOf(map.get(InputType.QUANTITY).getText());
+            quantityStr = String.valueOf(Objects.requireNonNull(map.get(InputType.QUANTITY)).getText());
         } catch (NullPointerException e) {
             quantityStr = "0";
         }
         try {
-            doseStr = String.valueOf(map.get(InputType.DOSE).getText());
+            doseStr = String.valueOf(Objects.requireNonNull(map.get(InputType.DOSE)).getText());
         } catch (NullPointerException e) {
             doseStr = "0";
         }
         if (type == MedType.SYRUP) {
             try {
-                volumeStr = String.valueOf(map.get(InputType.VOLUME).getText());
+                volumeStr = String.valueOf(Objects.requireNonNull(map.get(InputType.VOLUME)).getText());
             } catch (NullPointerException e) {
                 volumeStr = "0";
             }

@@ -6,6 +6,7 @@ import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseTimeToStr
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -113,7 +114,7 @@ public class DateTimeFragment extends Fragment {
 
     private void setRecyclerView() {
         RecyclerView timeRecyclerView = view.findViewById(R.id.time_list);
-        AddTimesAdapter adapter = ((AddMedsActivity) DateTimeFragment.this.getActivity())
+        AddTimesAdapter adapter = ((AddMedsActivity) requireActivity())
                 .getAddTimesAdapter();
         if (adapter == null) {
             adapter = new AddTimesAdapter();
@@ -124,7 +125,7 @@ public class DateTimeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         this.view = view;
         viewModel = new ViewModelProvider(requireActivity()).get(AddMedsViewModel.class);
         setRecyclerView();
