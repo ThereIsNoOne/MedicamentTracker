@@ -19,14 +19,12 @@ import java.util.ArrayList;
 
 public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHolder> {
 
-    private TreatmentsManager treatmentsManager;
+    private final TreatmentsManager treatmentsManager;
     private ArrayList<MedTimePair<LocalTime, Medicament>> todayMeds;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView medNameView;
         private final TextView medTimeView;
-
-        private int index;
 
         public ViewHolder(View view) {
             super(view);

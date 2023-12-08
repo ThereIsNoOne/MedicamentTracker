@@ -9,7 +9,6 @@ import com.szylas.medicamenttracker.datastore.TreatmentsWriter;
 import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.models.meds.Medicament;
-import com.szylas.medicamenttracker.models.meds.Pill;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

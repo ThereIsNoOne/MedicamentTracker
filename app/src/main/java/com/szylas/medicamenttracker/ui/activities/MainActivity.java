@@ -65,13 +65,21 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.add_meds) {
             startMedAddActivity();
             return true;
+        } else if (id == R.id.manage_meds) {
+            startManageMedsActivity();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void startManageMedsActivity() {
+        Intent intent = new Intent(this, ManageMedsActivity.class);
+        startActivity(intent);
+    }
+
     private void startMedAddActivity() {
-        Intent intent = new Intent(MainActivity.this, AddMedsActivity.class);
+        Intent intent = new Intent(this, AddMedsActivity.class);
         startActivity(intent);
     }
 
