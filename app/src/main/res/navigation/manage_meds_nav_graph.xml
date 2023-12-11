@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/manage_meds_nav_graph"
+    app:startDestination="@id/manageMedsListFragment">
+
+    <fragment
+        android:id="@+id/manageMedsListFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.ManageMedsListFragment"
+        android:label="fragment_manage_meds_list"
+        tools:layout="@layout/fragment_manage_meds_list" >
+        <action
+            android:id="@+id/action_manageMedsListFragment_to_manageDateTimesFragment"
+            app:destination="@id/manageDateTimesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageDateTimesFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.ManageDateTimesFragment"
+        android:label="fragment_manage_date_times"
+        tools:layout="@layout/fragment_manage_date_times" >
+        <action
+            android:id="@+id/action_manageDateTimesFragment_to_manageMedicationsFragment"
+            app:destination="@id/manageMedicationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageMedicationsFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.ManageMedicationsFragment"
+        android:label="fragment_manage_medications"
+        tools:layout="@layout/fragment_manage_medications" >
+        <action
+            android:id="@+id/action_manageMedicationsFragment_to_manageMedsListFragment"
+            app:destination="@id/manageMedsListFragment" />
+    </fragment>
+
+</navigation>

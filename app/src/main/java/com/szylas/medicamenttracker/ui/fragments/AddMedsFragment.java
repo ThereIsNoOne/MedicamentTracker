@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MedsFragment extends Fragment {
+public class AddMedsFragment extends Fragment {
 
     private View view;
     private AddMedsViewModel model;
@@ -41,7 +41,7 @@ public class MedsFragment extends Fragment {
     private MedType currentItem;
     private TextInputEditText medName;
 
-    public MedsFragment() {
+    public AddMedsFragment() {
         // Required empty public constructor
     }
 

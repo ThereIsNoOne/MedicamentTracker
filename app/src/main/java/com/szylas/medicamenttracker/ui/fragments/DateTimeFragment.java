@@ -5,6 +5,11 @@ import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseDateToStr
 import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseTimeToString;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,12 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -30,14 +29,12 @@ import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
 
-
-public class DateTimeFragment extends Fragment {
-
-    private View view;
-    private AddMedsViewModel viewModel;
+public abstract class DateTimeFragment extends Fragment {
+    protected View view;
+    protected AddMedsViewModel viewModel;
 
 
-    private void setApplicationTimePicker() {
+    protected void setApplicationTimePicker() {
         MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
                 .setTimeFormat(is24HourFormat(view.getContext()) ? TimeFormat.CLOCK_24H : TimeFormat.CLOCK_12H)
                 .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
@@ -60,7 +57,7 @@ public class DateTimeFragment extends Fragment {
         });
     }
 
-    private void setFinishDatePicker() {
+    protected void setFinishDatePicker() {
         MaterialDatePicker.Builder<Long> datePickerBuilder = MaterialDatePicker.Builder.datePicker();
 
         // Finish date picker show dialog
@@ -78,7 +75,7 @@ public class DateTimeFragment extends Fragment {
         });
     }
 
-    private void setStartDatePicker() {
+    protected void setStartDatePicker() {
         MaterialDatePicker.Builder<Long> datePickerBuilder = MaterialDatePicker.Builder.datePicker();
 
         // Start date picker show dialog
@@ -108,11 +105,10 @@ public class DateTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_date_time, container, false);
     }
 
-    private void setRecyclerView() {
+    protected void setRecyclerView() {
         RecyclerView timeRecyclerView = view.findViewById(R.id.time_list);
         AddTimesAdapter adapter = ((AddMedsActivity) requireActivity())
                 .getAddTimesAdapter();
@@ -127,7 +123,7 @@ public class DateTimeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         this.view = view;
-        viewModel = new ViewModelProvider(requireActivity()).get(AddMedsViewModel.class);
+        setViewModel();
         setRecyclerView();
         setApplicationTimePicker();
         setFinishDatePicker();
@@ -135,11 +131,7 @@ public class DateTimeFragment extends Fragment {
         setButton();
     }
 
-    private void setButton() {
-        MaterialButton accept = view.findViewById(R.id.add_single_med);
-        accept.setOnClickListener(view1 -> Navigation.findNavController(view).navigate(
-                R.id.action_dateTimeFragment_to_medsFragment));
-    }
+    protected abstract void setViewModel();
 
-
+    protected abstract void setButton();
 }
