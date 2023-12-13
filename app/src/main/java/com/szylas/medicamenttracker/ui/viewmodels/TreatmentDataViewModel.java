@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AddMedsViewModel extends ViewModel {
+public class TreatmentDataViewModel extends ViewModel {
     private final MutableLiveData<Integer> selectedApplicationTime = new MutableLiveData<>();
     private final MutableLiveData<Long> selectedStartDate = new MutableLiveData<>();
     private final MutableLiveData<Long> selectedFinishDate = new MutableLiveData<>();

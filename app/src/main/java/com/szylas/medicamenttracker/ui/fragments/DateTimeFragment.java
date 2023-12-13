@@ -14,11 +14,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -27,11 +25,11 @@ import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
-import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 public abstract class DateTimeFragment extends Fragment {
     protected View view;
-    protected AddMedsViewModel viewModel;
+    protected TreatmentDataViewModel viewModel;
 
 
     protected void setApplicationTimePicker() {
@@ -131,7 +129,10 @@ public abstract class DateTimeFragment extends Fragment {
         setButton();
     }
 
-    protected abstract void setViewModel();
+    protected void setViewModel() {
+        viewModel = new ViewModelProvider(requireActivity()).get(TreatmentDataViewModel.class);
+    }
+
 
     protected abstract void setButton();
 }

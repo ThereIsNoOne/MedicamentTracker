@@ -25,7 +25,7 @@ import com.szylas.medicamenttracker.models.MedType;
 import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
 import com.szylas.medicamenttracker.ui.helpers.InputType;
-import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AddMedsFragment extends Fragment {
 
     private View view;
-    private AddMedsViewModel model;
+    private TreatmentDataViewModel model;
 
     private final Map<InputType, TextInputEditText> inputs = new HashMap<>();
     private MedType currentItem;
@@ -59,7 +59,7 @@ public class AddMedsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle bundle) {
         this.view = view;
-        model = new ViewModelProvider(requireActivity()).get(AddMedsViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(TreatmentDataViewModel.class);
         setRecyclerView();
         setAddButton();
         findInputs();

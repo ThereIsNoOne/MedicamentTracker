@@ -18,7 +18,7 @@ import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
-import com.szylas.medicamenttracker.ui.viewmodels.AddMedsViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 import java.util.Objects;
 
@@ -49,7 +49,7 @@ public class AddMedsActivity extends AppCompatActivity {
     }
 
     private void setViewModel() {
-        AddMedsViewModel viewModel = new ViewModelProvider(this).get(AddMedsViewModel.class);
+        TreatmentDataViewModel viewModel = new ViewModelProvider(this).get(TreatmentDataViewModel.class);
         viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addItem(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
