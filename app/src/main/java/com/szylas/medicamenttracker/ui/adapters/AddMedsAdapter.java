@@ -2,6 +2,8 @@ package com.szylas.medicamenttracker.ui.adapters;
 
 import androidx.annotation.NonNull;
 
+import com.szylas.medicamenttracker.ui.abstr.AddAdapter;
+
 public class AddMedsAdapter extends AddAdapter<String> {
 
     public AddMedsAdapter() {

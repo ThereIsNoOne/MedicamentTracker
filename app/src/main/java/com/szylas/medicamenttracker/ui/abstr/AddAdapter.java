@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.ui.adapters;
+package com.szylas.medicamenttracker.ui.abstr;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-class AddAdapter<T> extends RecyclerView.Adapter<AddAdapter.ViewHolder>{
+public abstract class AddAdapter<T> extends RecyclerView.Adapter<AddAdapter.ViewHolder>{
 
     protected final List<T> dataList = new LinkedList<>();
     protected Consumer<Integer> atItemRemoved;

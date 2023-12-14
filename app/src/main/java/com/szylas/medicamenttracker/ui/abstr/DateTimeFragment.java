@@ -1,4 +1,4 @@
-package com.szylas.medicamenttracker.ui.fragments;
+package com.szylas.medicamenttracker.ui.abstr;
 
 import static android.text.format.DateFormat.is24HourFormat;
 import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseDateToString;

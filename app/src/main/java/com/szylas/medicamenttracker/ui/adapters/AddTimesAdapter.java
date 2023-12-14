@@ -5,6 +5,8 @@ import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseTimeToStr
 
 import androidx.annotation.NonNull;
 
+import com.szylas.medicamenttracker.ui.abstr.AddAdapter;
+
 public class AddTimesAdapter extends AddAdapter<Integer> {
 
     public AddTimesAdapter() {
