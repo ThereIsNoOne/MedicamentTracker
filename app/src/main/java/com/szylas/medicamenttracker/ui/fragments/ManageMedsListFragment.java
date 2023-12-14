@@ -11,11 +11,6 @@ import android.view.ViewGroup;
 
 import com.szylas.medicamenttracker.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ManageMedsListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ManageMedsListFragment extends Fragment {
 
     private View view;
