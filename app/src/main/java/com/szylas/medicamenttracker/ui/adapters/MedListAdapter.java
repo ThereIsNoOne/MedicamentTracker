@@ -12,72 +12,38 @@ import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.models.MedTimePair;
 import com.szylas.medicamenttracker.models.meds.Medicament;
+import com.szylas.medicamenttracker.ui.abstr.MedListAbstractAdapter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHolder> {
+public class MedListAdapter extends MedListAbstractAdapter {
 
-    private final TreatmentsManager treatmentsManager;
     private ArrayList<MedTimePair<LocalTime, Medicament>> todayMeds;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView medNameView;
-        private final TextView medTimeView;
-
-        public ViewHolder(View view) {
-            super(view);
-
-            medNameView = view.findViewById(R.id.medName);
-            medTimeView = view.findViewById(R.id.medTime);
-
-        }
-
-        public TextView getMedNameView() {
-            return medNameView;
-        }
-
-        public TextView getTimeTextView() {
-            return medTimeView;
-        }
-
-    }
-
     public MedListAdapter(TreatmentsManager treatmentsManager) {
-        this.treatmentsManager = treatmentsManager;
+        super(treatmentsManager);
         setUpTodayMeds(LocalDate.now());
     }
 
     public MedListAdapter(TreatmentsManager treatmentsManager, LocalDate today) {
-        this.treatmentsManager = treatmentsManager;
+        super(treatmentsManager);
         setUpTodayMeds(today);
     }
 
     private void setUpTodayMeds(LocalDate date) {
-        todayMeds = treatmentsManager.treatmentsForDay(date);
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.med_item, parent, false);
-
-        return new ViewHolder(view);
+        todayMeds = manager.treatmentsForDay(date);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.getMedNameView().setText(todayMeds.get(position).getValue().getName());
-        holder.getTimeTextView().setText(todayMeds.get(position).getKey().toString());
+        holder.bind(todayMeds.get(position).getValue().getName(),
+                todayMeds.get(position).getKey().toString());
     }
 
     @Override
     public int getItemCount() {
         return todayMeds.size();
     }
-
-
-
 }

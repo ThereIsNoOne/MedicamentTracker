@@ -18,7 +18,7 @@
             android:id="@+id/manage_meds_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="enterAlways"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +29,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintTop_toBottomOf="@id/manage_meds_toolbar_wrapper"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout = "@layout/fragment_manage_meds_list"
+        tools:layout = "@layout/fragment_manage_treatments"
         app:defaultNavHost="true"
         app:navGraph="@navigation/manage_meds_nav_graph"
         />

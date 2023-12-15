@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.szylas.medicamenttracker.R;
+import com.szylas.medicamenttracker.ui.abstr.TimeAdapterable;
 import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
@@ -22,7 +23,7 @@ import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 import java.util.Objects;
 
-public class AddMedsActivity extends AppCompatActivity {
+public class AddMedsActivity extends AppCompatActivity implements TimeAdapterable {
 
     private AddTimesAdapter addTimesAdapter;
     private AddMedsAdapter addMedsAdapter;
@@ -96,6 +97,7 @@ public class AddMedsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public AddTimesAdapter getAddTimesAdapter() {
         return addTimesAdapter;
     }

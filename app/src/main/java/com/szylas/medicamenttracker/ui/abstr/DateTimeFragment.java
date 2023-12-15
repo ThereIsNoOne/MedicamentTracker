@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,21 +26,25 @@ import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
+import com.szylas.medicamenttracker.ui.viewmodels.DateTimeViewModel;
 import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
+
+import java.sql.Time;
+import java.util.Objects;
 
 public abstract class DateTimeFragment extends Fragment {
     protected View view;
-    protected TreatmentDataViewModel viewModel;
+    protected DateTimeViewModel viewModel;
 
 
-    protected void setApplicationTimePicker() {
+    protected void setApplicationTimePicker(int timeFiledId, int timePickerId) {
         MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
                 .setTimeFormat(is24HourFormat(view.getContext()) ? TimeFormat.CLOCK_24H : TimeFormat.CLOCK_12H)
                 .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
                 .build();
 
-        MaterialTextView timeView = view.findViewById(R.id.application_time_field);
-        Button applicationTimeButton = view.findViewById(R.id.application_time_picker);
+        MaterialTextView timeView = view.findViewById(timeFiledId);
+        Button applicationTimeButton = view.findViewById(timePickerId);
 
         applicationTimeButton.setOnClickListener(view -> timePicker.show(
                 getParentFragmentManager(), Literals.TIME_PICKER
@@ -55,14 +60,14 @@ public abstract class DateTimeFragment extends Fragment {
         });
     }
 
-    protected void setFinishDatePicker() {
+    protected void setFinishDatePicker(int finishDateFiledId, int finishDatePickerId) {
         MaterialDatePicker.Builder<Long> datePickerBuilder = MaterialDatePicker.Builder.datePicker();
 
         // Finish date picker show dialog
         final MaterialDatePicker<Long> finishDatePicker = datePickerBuilder.build();
 
-        MaterialTextView finishDateField = view.findViewById(R.id.finish_date_field);
-        Button finishDatePickerButton = view.findViewById(R.id.finish_date_picker);
+        MaterialTextView finishDateField = view.findViewById(finishDateFiledId);
+        Button finishDatePickerButton = view.findViewById(finishDatePickerId);
 
         finishDatePickerButton.setOnClickListener(view -> finishDatePicker.show(
                 getParentFragmentManager(), Literals.FINISH_PICKER
@@ -73,14 +78,14 @@ public abstract class DateTimeFragment extends Fragment {
         });
     }
 
-    protected void setStartDatePicker() {
+    protected void setStartDatePicker(int startDateFiledId, int startDatePickerId) {
         MaterialDatePicker.Builder<Long> datePickerBuilder = MaterialDatePicker.Builder.datePicker();
 
         // Start date picker show dialog
         final MaterialDatePicker<Long> startDatePicker = datePickerBuilder.build();
 
-        MaterialTextView startDateField = view.findViewById(R.id.start_date_field);
-        Button startDatePickerButton = view.findViewById(R.id.start_date_picker);
+        MaterialTextView startDateField = view.findViewById(startDateFiledId);
+        Button startDatePickerButton = view.findViewById(startDatePickerId);
 
         startDatePickerButton.setOnClickListener(view -> startDatePicker.show(
                 getParentFragmentManager(), Literals.START_PICKER
@@ -100,16 +105,18 @@ public abstract class DateTimeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_date_time, container, false);
-    }
+
 
     protected void setRecyclerView() {
         RecyclerView timeRecyclerView = view.findViewById(R.id.time_list);
-        AddTimesAdapter adapter = ((AddMedsActivity) requireActivity())
+        if (!(requireActivity() instanceof TimeAdapterable)) {
+            throw new RuntimeException("Invalid activity detected!");
+        }
+
+        Class<? extends TimeAdapterable> type = (Class<? extends TimeAdapterable>) requireActivity().getClass();
+        AddTimesAdapter adapter = (Objects.requireNonNull(type.cast(requireActivity())))
                 .getAddTimesAdapter();
+
         if (adapter == null) {
             adapter = new AddTimesAdapter();
             Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
@@ -118,19 +125,8 @@ public abstract class DateTimeFragment extends Fragment {
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        this.view = view;
-        setViewModel();
-        setRecyclerView();
-        setApplicationTimePicker();
-        setFinishDatePicker();
-        setStartDatePicker();
-        setButton();
-    }
-
     protected void setViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(TreatmentDataViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(DateTimeViewModel.class);
     }
 
 

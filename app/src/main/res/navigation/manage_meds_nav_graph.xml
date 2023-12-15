@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/manageMedsListFragment"
-        android:name="com.szylas.medicamenttracker.ui.fragments.ManageMedsListFragment"
+        android:name="com.szylas.medicamenttracker.ui.fragments.ManageTreatmentsFragment"
         android:label="fragment_manage_meds_list"
-        tools:layout="@layout/fragment_manage_meds_list" >
+        tools:layout="@layout/fragment_manage_treatments" >
         <action
             android:id="@+id/action_manageMedsListFragment_to_manageDateTimesFragment"
             app:destination="@id/manageDateTimesFragment" />

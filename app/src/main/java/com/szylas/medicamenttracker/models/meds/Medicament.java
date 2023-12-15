@@ -59,6 +59,6 @@ public abstract class Medicament {
     @NonNull
     @Override
     public String toString() {
-        return String.format("Type: %s, name: %s, dose: %d, quantity: %d", getClass(), name, dose, quantity);
+        return name;
     }
 }

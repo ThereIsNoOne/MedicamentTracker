@@ -45,6 +45,14 @@ public class TreatmentsManager {
         treatmentsList.add(treatment);
     }
 
+    public Treatment get(int i) {
+        return treatmentsList.get(i);
+    }
+
+    public int size() {
+        return treatmentsList.size();
+    }
+
     public void saveTreatments() {
         List<Treatment> currentTreatments = treatmentsList.stream()
                         .filter(item -> item.getFinishDate().orElse(LocalDate.MAX).isAfter(LocalDate.now()))

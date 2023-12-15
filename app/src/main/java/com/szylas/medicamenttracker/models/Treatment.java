@@ -116,6 +116,34 @@ public class Treatment implements Iterable<Medicament> {
                 }
             }
         }};
+    }
 
+    public String[] representation() {
+        StringBuilder medBuilder = new StringBuilder();
+        switch (medications.size()) {
+            case 0:
+                medBuilder.append("No drugs on list!");
+                break;
+            case 1:
+                medBuilder.append(medications.get(0));
+                break;
+            case 2:
+                medBuilder.append(medications.get(0)).append(", ").append(medications.get(1));
+                break;
+            default:
+                medBuilder
+                        .append(medications.get(0))
+                        .append(", ")
+                        .append(medications.get(1))
+                        .append(", ...");
+        }
+
+        StringBuilder timeBuilder = new StringBuilder();
+        timeBuilder.append(startDate);
+        if (finishDate != null) {
+            timeBuilder.append(" -> ").append(finishDate);
+        }
+
+        return new String[] {medBuilder.toString(), timeBuilder.toString()};
     }
 }
