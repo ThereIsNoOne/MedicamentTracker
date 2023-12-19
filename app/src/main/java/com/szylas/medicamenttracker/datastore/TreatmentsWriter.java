@@ -1,20 +1,16 @@
 package com.szylas.medicamenttracker.datastore;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.util.Log;
 
+import com.szylas.medicamenttracker.computation.ObjectParser;
 import com.szylas.medicamenttracker.models.Treatment;
-import com.szylas.medicamenttracker.models.meds.Medicament;
-import com.szylas.medicamenttracker.models.meds.Syrup;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public final class TreatmentsWriter {
@@ -47,50 +43,18 @@ public final class TreatmentsWriter {
             builder.append(FORMATTER.format(treatment.getStartDate()));
             builder.append(";");
             Optional<LocalDate> finishDate = treatment.getFinishDate();
+            /// TODO: Reformat this
             if (finishDate.isPresent()) {
-                builder.append(FORMATTER.format(treatment.getFinishDate().get()));
+                builder.append(FORMATTER.format(finishDate.get()));
             } else {
                 builder.append("null");
             }
             builder.append(";");
-            builder.append(parseMeds(treatment));
+            builder.append(ObjectParser.parseMeds(treatment));
             builder.append(";");
-            builder.append(parseTimes(treatment));
+            builder.append(ObjectParser.parseTimes(treatment));
             builder.append("\n");
         }
-        return builder.toString();
-    }
-
-    private static String parseTimes(Treatment treatment) {
-        StringBuilder builder = new StringBuilder();
-        for (LocalTime time: treatment.getApplicationTime()) {
-            builder.append(time.getHour());
-            builder.append(":");
-            builder.append(time.getMinute());
-            builder.append(",");
-        }
-        builder.deleteCharAt(builder.length()-1);
-        return builder.toString();
-    }
-
-    private static String parseMeds(Treatment treatment) {
-        StringBuilder builder = new StringBuilder();
-        for (Medicament medicament: treatment.getMedications()) {
-            String[] class_ = medicament.getClass().toString().split("\\.");
-            builder.append(class_[class_.length-1].toUpperCase());
-            builder.append(":");
-            builder.append(medicament.getName());
-            builder.append(":");
-            builder.append(medicament.getQuantity());
-            builder.append(":");
-            builder.append(medicament.getDose());
-            if (medicament instanceof Syrup) {
-                builder.append(":");
-                builder.append(((Syrup) medicament).getVolume());
-            }
-            builder.append(",");
-        }
-        builder.deleteCharAt(builder.length()-1);
         return builder.toString();
     }
 

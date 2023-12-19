@@ -1,5 +1,7 @@
 package com.szylas.medicamenttracker.datastore;
 
+import static com.szylas.medicamenttracker.computation.ObjectParser.parseApplicationTime;
+import static com.szylas.medicamenttracker.computation.ObjectParser.parseMedicamentList;
 import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.determineType;
 import static com.szylas.medicamenttracker.sharedhelpers.MedicamentParser.parseSingleMedicament;
 
@@ -114,35 +116,6 @@ public final class TreatmentsReader {
         return new Treatment(medicament, startDate, finishDate, applicationTime);
     }
 
-    private static ArrayList<LocalTime> parseApplicationTime(String value) {
-        String[] times = value.split(",");
-        ArrayList<LocalTime> timesArray = new ArrayList<>();
 
-        for (String time : times) {
-            String[] timeVal = time.split(":");
-            int hour = Integer.parseInt(timeVal[0]);
-            int minute = Integer.parseInt(timeVal[1]);
-            timesArray.add(LocalTime.of(hour, minute));
-        }
-
-        return timesArray;
-    }
-
-    private static ArrayList<Medicament> parseMedicamentList(String value) {
-        String[] medications = value.split(",");
-        ArrayList<Medicament> medicationsArray = new ArrayList<>();
-
-        for (String medication : medications) {
-            Optional<Medicament> med = parseSingleMedicament(medication);
-
-            if (!med.isPresent()) {
-                continue;
-            }
-            medicationsArray.add(
-                    med.get()
-            );
-        }
-        return medicationsArray;
-    }
 
 }

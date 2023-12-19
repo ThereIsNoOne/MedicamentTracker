@@ -88,7 +88,7 @@ public class AddMedsFragment extends Fragment {
                 .getAddMedsAdapter();
         if (adapter == null) {
             adapter = new AddMedsAdapter();
-            Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
+            Log.e("AddMedsAdapter", "AddMedsAdapter not found, replacing with empty!");
         }
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

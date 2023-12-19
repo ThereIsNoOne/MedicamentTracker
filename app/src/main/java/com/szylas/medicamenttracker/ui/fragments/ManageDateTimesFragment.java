@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -30,6 +31,14 @@ public class ManageDateTimesFragment extends DateTimeFragment {
         setFinishDatePicker(R.id.finish_date_field, R.id.finish_date_picker);
         setStartDatePicker(R.id.start_date_field, R.id.start_date_picker);
         setButton();
+
+        setDates();
+    }
+
+    private void setDates() {
+        ((TextView) view.findViewById(R.id.application_time_field)).setText("");
+        ((TextView) view.findViewById(R.id.finish_date_field)).setText("");
+        ((TextView) view.findViewById(R.id.start_date_field)).setText("");
     }
 
     @Override

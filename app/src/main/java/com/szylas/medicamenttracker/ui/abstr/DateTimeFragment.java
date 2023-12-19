@@ -6,14 +6,10 @@ import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseTimeToStr
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,13 +19,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
-import com.szylas.medicamenttracker.ui.activities.AddMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.viewmodels.DateTimeViewModel;
-import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
-import java.sql.Time;
 import java.util.Objects;
 
 public abstract class DateTimeFragment extends Fragment {

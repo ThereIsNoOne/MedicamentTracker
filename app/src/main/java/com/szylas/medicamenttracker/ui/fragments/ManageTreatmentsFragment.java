@@ -17,6 +17,8 @@ import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.ui.activities.ManageMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.ManageTreatmentAdapter;
+import com.szylas.medicamenttracker.ui.helpers.Literals;
+import com.szylas.medicamenttracker.ui.helpers.ParcelPacker;
 import com.szylas.medicamenttracker.ui.viewmodels.MangeMedsViewModel;
 import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
@@ -52,9 +54,16 @@ public class ManageTreatmentsFragment extends Fragment {
 
         TreatmentsManager manager = ((ManageMedsActivity) requireActivity()).getManager();
         ManageTreatmentAdapter adapter = new ManageTreatmentAdapter(manager, position -> {
+            // Informs which treatment is being modified
             viewModel.setCurrentPosition(position);
+
+
+            // Packs information about treatment
+            Bundle treatmentBundle = new Bundle();
+            treatmentBundle.putParcelable(Literals.TREATMENT_PARCEL, ParcelPacker.pack(manager.get(position)));
+
             Navigation.findNavController(view).navigate(
-                    R.id.action_manageMedsListFragment_to_manageDateTimesFragment);
+                    R.id.action_manageMedsListFragment_to_manageDateTimesFragment, treatmentBundle);
         });
         recyclerView.setAdapter(adapter);
 
