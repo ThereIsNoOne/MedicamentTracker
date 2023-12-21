@@ -2,7 +2,6 @@ package com.szylas.medicamenttracker.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -12,18 +11,17 @@ import android.view.MenuItem;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.ui.abstr.TimeAdapterable;
-import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
-import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
-import com.szylas.medicamenttracker.ui.adapters.ManageTreatmentAdapter;
+import com.szylas.medicamenttracker.ui.adapters.TimesAdapter;
 import com.szylas.medicamenttracker.ui.viewmodels.MangeMedsViewModel;
-import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 import java.util.Objects;
 
 public class ManageMedsActivity extends AppCompatActivity implements TimeAdapterable {
 
     private TreatmentsManager manager;
-    private AddTimesAdapter adapter;
+    private TimesAdapter adapter;
+
+    private int currentModification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +38,15 @@ public class ManageMedsActivity extends AppCompatActivity implements TimeAdapter
         setUpViewModel();
 
         manager = new TreatmentsManager(this);
-        adapter = new AddTimesAdapter();
+        adapter = new TimesAdapter();
     }
 
     private void setUpViewModel() {
         MangeMedsViewModel viewModel = new ViewModelProvider(this).get(MangeMedsViewModel.class);
-        viewModel.getCurrentPosition().observe(this, item -> Log.d("MANAGE_MEDS_CHOSEN", item.toString()));
+        viewModel.getCurrentPosition().observe(this, item -> currentModification = item);
+        viewModel.getSelectedTime().observe(this, item -> adapter.addItem(item));
+
+
     }
 
     public TreatmentsManager getManager() {
@@ -62,7 +63,7 @@ public class ManageMedsActivity extends AppCompatActivity implements TimeAdapter
     }
 
     @Override
-    public AddTimesAdapter getAddTimesAdapter() {
+    public TimesAdapter getAddTimesAdapter() {
         return adapter;
     }
 }

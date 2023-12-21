@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.button.MaterialButton;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.abstr.DateTimeFragment;
+import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 
 public class AddDateTimeFragment extends DateTimeFragment {
@@ -18,7 +19,7 @@ public class AddDateTimeFragment extends DateTimeFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         this.view = view;
-        setViewModel();
+        setViewModel(TreatmentDataViewModel.class);
         setRecyclerView();
         setApplicationTimePicker(R.id.application_time_field, R.id.application_time_picker);
         setFinishDatePicker(R.id.finish_date_field, R.id.finish_date_picker);

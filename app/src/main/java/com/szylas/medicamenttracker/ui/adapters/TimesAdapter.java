@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.szylas.medicamenttracker.ui.abstr.AddAdapter;
 
-public class AddTimesAdapter extends AddAdapter<Integer> {
+public class TimesAdapter extends AddAdapter<Integer> {
 
-    public AddTimesAdapter() {
+    public TimesAdapter() {
         super();
         atItemRemoved = position -> {
             dataList.remove(dataList.get(position));

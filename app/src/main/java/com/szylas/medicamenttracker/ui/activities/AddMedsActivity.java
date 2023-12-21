@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.ui.abstr.TimeAdapterable;
 import com.szylas.medicamenttracker.ui.adapters.AddMedsAdapter;
-import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
+import com.szylas.medicamenttracker.ui.adapters.TimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class AddMedsActivity extends AppCompatActivity implements TimeAdapterable {
 
-    private AddTimesAdapter addTimesAdapter;
+    private TimesAdapter timesAdapter;
     private AddMedsAdapter addMedsAdapter;
 
     long[] dates = new long[2];
@@ -42,7 +42,7 @@ public class AddMedsActivity extends AppCompatActivity implements TimeAdapterabl
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        addTimesAdapter = new AddTimesAdapter();
+        timesAdapter = new TimesAdapter();
         addMedsAdapter = new AddMedsAdapter();
         setViewModel();
         setButtonsActions();
@@ -51,7 +51,7 @@ public class AddMedsActivity extends AppCompatActivity implements TimeAdapterabl
 
     private void setViewModel() {
         TreatmentDataViewModel viewModel = new ViewModelProvider(this).get(TreatmentDataViewModel.class);
-        viewModel.getSelectedTime().observe(this, item -> addTimesAdapter.addItem(item));
+        viewModel.getSelectedTime().observe(this, item -> timesAdapter.addItem(item));
         viewModel.getSelectedStartDate().observe(this, item -> dates[0] = item);
         viewModel.getSelectedFinishDate().observe(this, item -> dates[1] = item);
         viewModel.getSelectedMed().observe(this, item -> addMedsAdapter.addItem(item));
@@ -81,7 +81,7 @@ public class AddMedsActivity extends AppCompatActivity implements TimeAdapterabl
         mainIntent.putExtra(Literals.TREATMENT_PARCEL, new TreatmentParcel(
                 dates[0],
                 dates[1],
-                packTimesToArray(addTimesAdapter.getDataList()),
+                packTimesToArray(timesAdapter.getDataList()),
                 packMedsToArray(addMedsAdapter.getDataList())
         ));
 
@@ -98,8 +98,8 @@ public class AddMedsActivity extends AppCompatActivity implements TimeAdapterabl
     }
 
     @Override
-    public AddTimesAdapter getAddTimesAdapter() {
-        return addTimesAdapter;
+    public TimesAdapter getAddTimesAdapter() {
+        return timesAdapter;
     }
 
     public AddMedsAdapter getAddMedsAdapter() {

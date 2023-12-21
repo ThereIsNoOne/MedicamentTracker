@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,15 +20,17 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.szylas.medicamenttracker.R;
-import com.szylas.medicamenttracker.ui.adapters.AddTimesAdapter;
+import com.szylas.medicamenttracker.ui.adapters.TimesAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.viewmodels.DateTimeViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
 
 import java.util.Objects;
 
 public abstract class DateTimeFragment extends Fragment {
     protected View view;
     protected DateTimeViewModel viewModel;
+    protected TimesAdapter adapter;
 
 
     protected void setApplicationTimePicker(int timeFiledId, int timePickerId) {
@@ -107,19 +110,19 @@ public abstract class DateTimeFragment extends Fragment {
         }
 
         Class<? extends TimeAdapterable> type = (Class<? extends TimeAdapterable>) requireActivity().getClass();
-        AddTimesAdapter adapter = (Objects.requireNonNull(type.cast(requireActivity())))
+        adapter = (Objects.requireNonNull(type.cast(requireActivity())))
                 .getAddTimesAdapter();
 
         if (adapter == null) {
-            adapter = new AddTimesAdapter();
+            adapter = new TimesAdapter();
             Log.e("TimeListAdapter", "TimeListAdapter not found, replacing with empty!");
         }
         timeRecyclerView.setAdapter(adapter);
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
-    protected void setViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(DateTimeViewModel.class);
+    protected void setViewModel(Class<? extends DateTimeViewModel> viewModelClass) {
+        viewModel = new ViewModelProvider(requireActivity()).get(viewModelClass);
     }
 
 

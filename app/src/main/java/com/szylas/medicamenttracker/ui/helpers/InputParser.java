@@ -7,19 +7,26 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.szylas.medicamenttracker.models.MedType;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Objects;
 
 public final class InputParser {
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     public static String parseDateToString(long timestamp) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return Instant
                 .ofEpochMilli(timestamp)
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate()
                 .format(formatter);
+    }
+
+    public static String parseDateToString(LocalDate date) {
+        return date.format(formatter);
     }
 
     @SuppressLint("DefaultLocale")

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MangeMedsViewModel extends ViewModel {
+public class MangeMedsViewModel extends DateTimeViewModel {
 
     private final MutableLiveData<Integer> currentPosition = new MutableLiveData<>();
     private boolean hasChanged = false;
