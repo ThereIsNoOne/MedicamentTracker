@@ -28,13 +28,16 @@ public final class TreatmentsWriter {
             "# WARNING: Do NOT change this file, it may (and probably will) cause app to stop working!";
 
     public static void save(List<Treatment> treatments, Context context) {
-        try (FileOutputStream outputStream = context.openFileOutput(PATH, Context.MODE_PRIVATE)) {
-            String message = prepareMessage(treatments);
-            outputStream.write(message.getBytes());
-            Log.d("SAVING", String.format(message));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        String message = prepareMessage(treatments);
+
+        synchronized (String.class) {
+            try (FileOutputStream outputStream = context.openFileOutput(PATH, Context.MODE_PRIVATE)) {
+                outputStream.write(message.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+        Log.d("SAVING", String.format(message));
     }
 
     private static String prepareMessage(List<Treatment> treatments) {
@@ -43,7 +46,6 @@ public final class TreatmentsWriter {
             builder.append(FORMATTER.format(treatment.getStartDate()));
             builder.append(";");
             Optional<LocalDate> finishDate = treatment.getFinishDate();
-            /// TODO: Reformat this
             if (finishDate.isPresent()) {
                 builder.append(FORMATTER.format(finishDate.get()));
             } else {

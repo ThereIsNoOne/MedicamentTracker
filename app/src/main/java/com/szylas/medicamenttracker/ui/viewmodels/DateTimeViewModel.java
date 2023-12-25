@@ -18,7 +18,7 @@ public class DateTimeViewModel extends ViewModel {
     }
 
     public void setSelectedStartDate(long startDate) {
-        selectedStartDate.setValue(startDate);
+        selectedStartDate.postValue(startDate);
     }
 
     public LiveData<Long> getSelectedStartDate() {
@@ -26,7 +26,7 @@ public class DateTimeViewModel extends ViewModel {
     }
 
     public void setSelectedFinishDate(long finishDate) {
-        selectedFinishDate.setValue(finishDate);
+        selectedFinishDate.postValue(finishDate);
     }
 
     public LiveData<Long> getSelectedFinishDate() {

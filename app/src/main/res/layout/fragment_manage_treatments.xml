@@ -9,11 +9,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/manage_treatments_recycler_view"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/manage_treatments_ok_button"
         android:layout_margin="@dimen/fab_margin"
         android:padding="@dimen/padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/manage_treatments_ok_button"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/ok_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

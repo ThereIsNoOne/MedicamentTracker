@@ -32,7 +32,10 @@
         tools:layout = "@layout/fragment_manage_treatments"
         app:defaultNavHost="true"
         app:navGraph="@navigation/manage_meds_nav_graph"
+        android:layout_margin="@dimen/fab_margin"
         />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

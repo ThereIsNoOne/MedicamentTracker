@@ -14,26 +14,27 @@ import java.util.Optional;
 
 public class Treatment implements Iterable<Medicament> {
 
-    public ArrayList<Medicament> getMedications() {
+    public List<Medicament> getMedications() {
         return medications;
     }
 
-    public ArrayList<LocalTime> getApplicationTime() {
+    public List<LocalTime> getApplicationTime() {
         return applicationTime;
     }
 
-    private ArrayList<Medicament> medications = new ArrayList<>();
-    private ArrayList<LocalTime> applicationTime;
-    private final LocalDate startDate;
+    private List<Medicament> medications = new ArrayList<>();
 
+    private List<LocalTime> applicationTime;
+
+    private LocalDate startDate;
     // May be null to indicate that there is no finish date and treatment should be
     // continued till user cancels it.
-    private LocalDate finishDate;
 
+    private LocalDate finishDate;
     public Treatment(Medicament medicament,
                      LocalDate startDate,
                      LocalDate finishDate,
-                     ArrayList<LocalTime> applicationTime) {
+                     List<LocalTime> applicationTime) {
         if (applicationTime.size() == 0) {
             throw new IllegalStateException("Application time should not be empty");
         }
@@ -46,10 +47,10 @@ public class Treatment implements Iterable<Medicament> {
         medications.add(medicament);
     }
 
-    public Treatment(ArrayList<Medicament> medicament,
+    public Treatment(List<Medicament> medicament,
                      LocalDate startDate,
                      LocalDate finishDate,
-                     ArrayList<LocalTime> applicationTime) {
+                     List<LocalTime> applicationTime) {
         if (applicationTime.size() == 0) {
             throw new IllegalStateException("Application time should not be empty");
         }
@@ -84,6 +85,18 @@ public class Treatment implements Iterable<Medicament> {
 
     public void removeMedicament(Medicament medicament) {
         medications.remove(medicament);
+    }
+
+    public void setApplicationTime(List<LocalTime> applicationTime) {
+        this.applicationTime = applicationTime;
+    }
+
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public void setMedications(List<Medicament> medications) {
+        this.medications = medications;
     }
 
     @NonNull
@@ -145,5 +158,13 @@ public class Treatment implements Iterable<Medicament> {
         }
 
         return new String[] {medBuilder.toString(), timeBuilder.toString()};
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setValues(int position, List<Integer> values) {
+        medications.get(position).setValues(values);
     }
 }

@@ -23,4 +23,8 @@ public class TimesAdapter extends AddAdapter<Integer> {
         int time = dataList.get(position);
         holder.bind(parseTimeToString(time/60, time%60), atItemRemoved);
     }
+
+    public void clear() {
+        dataList.clear();
+    }
 }

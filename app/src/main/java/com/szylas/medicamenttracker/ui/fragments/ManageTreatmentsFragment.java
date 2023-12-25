@@ -1,6 +1,10 @@
 package com.szylas.medicamenttracker.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,10 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.google.android.material.button.MaterialButton;
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.ui.activities.ManageMedsActivity;
@@ -24,8 +25,8 @@ import com.szylas.medicamenttracker.ui.viewmodels.ManageMedsViewModel;
 public class ManageTreatmentsFragment extends Fragment {
 
     private ManageMedsViewModel viewModel;
-
     private View view;
+
     public ManageTreatmentsFragment() {
         // Required empty public constructor
     }
@@ -46,13 +47,23 @@ public class ManageTreatmentsFragment extends Fragment {
         this.view = view;
         viewModel = new ViewModelProvider(requireActivity()).get(ManageMedsViewModel.class);
         setupRecyclerView();
+
+        setupButton(view);
+    }
+
+    private void setupButton(@NonNull View view) {
+        MaterialButton okButton = view.findViewById(R.id.manage_treatments_ok_button);
+        okButton.setOnClickListener(((ManageMedsActivity) requireActivity())::okButton);
     }
 
     private void setupRecyclerView() {
         RecyclerView recyclerView = view.findViewById(R.id.manage_treatments_recycler_view);
 
         TreatmentsManager manager = ((ManageMedsActivity) requireActivity()).getManager();
-        ManageTreatmentAdapter adapter = new ManageTreatmentAdapter(manager, position -> {
+        Log.d("AdapterCreation", "Creating adapter for treatments management.");
+        // Informs which treatment is being modified
+        // Packs information about treatment
+        ManageTreatmentAdapter manageTreatmentAdapter = new ManageTreatmentAdapter(manager, position -> {
             // Informs which treatment is being modified
             viewModel.setCurrentPosition(position);
 
@@ -63,8 +74,9 @@ public class ManageTreatmentsFragment extends Fragment {
             Navigation.findNavController(view).navigate(
                     R.id.action_manageMedsListFragment_to_manageDateTimesFragment, treatmentBundle);
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(manageTreatmentAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
     }
 }

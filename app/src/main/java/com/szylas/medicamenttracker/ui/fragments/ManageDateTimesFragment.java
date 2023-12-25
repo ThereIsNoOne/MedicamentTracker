@@ -22,6 +22,12 @@ import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
 import com.szylas.medicamenttracker.ui.viewmodels.ManageMedsViewModel;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Optional;
+
 public class ManageDateTimesFragment extends DateTimeFragment {
 
     private Treatment treatment;
@@ -51,6 +57,7 @@ public class ManageDateTimesFragment extends DateTimeFragment {
     }
 
     private void fillAdapter() {
+        adapter.clear();
         treatment.getApplicationTime().stream()
                 .mapToInt(item -> item.getHour() * 60 + item.getMinute())
                 .forEach(item -> adapter.addItem(item));
@@ -71,7 +78,6 @@ public class ManageDateTimesFragment extends DateTimeFragment {
     private void getTreatment() {
 
         if (getArguments() == null) {
-            // TODO: Add null handling
             Log.d("FRAGMENT_ARGS", "Args are null");
             return;
         }
@@ -82,6 +88,19 @@ public class ManageDateTimesFragment extends DateTimeFragment {
         }
 
         treatment = treatmentParcel.getTreatment();
+        Optional<LocalDate> finishDate = treatment.getFinishDate();
+        if (finishDate.isPresent()) {
+            viewModel.setSelectedFinishDate(LocalDateTime.of(finishDate.get(), LocalTime.of(0, 0))
+                    .atZone(ZoneId.systemDefault())
+                    .toEpochSecond() * 1000L);
+        } else {
+            viewModel.setSelectedFinishDate(0L);
+        }
+
+        viewModel.setSelectedStartDate(LocalDateTime.of(treatment.getStartDate(), LocalTime.of(0, 0))
+                .atZone(ZoneId.systemDefault())
+                .toEpochSecond() * 1000L);
+
         requireActivity().runOnUiThread(this::setDates);
         requireActivity().runOnUiThread(this::setButton);
     }

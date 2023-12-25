@@ -49,22 +49,24 @@ public final class TreatmentsReader {
                 throw new RuntimeException(e);
             }
         }
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput(PATH)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("#")) {
-                    continue;
-                }
-                String[] values = line.split(";");
-                if (values.length != 4) {
-                    continue;
-                }
+        synchronized (String.class) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput(PATH)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("#")) {
+                        continue;
+                    }
+                    String[] values = line.split(";");
+                    if (values.length != 4) {
+                        continue;
+                    }
 
-                Treatment treatment = getTreatment(values);
-                treatments.add(treatment);
+                    Treatment treatment = getTreatment(values);
+                    treatments.add(treatment);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         return treatments;

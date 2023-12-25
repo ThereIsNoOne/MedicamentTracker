@@ -1,5 +1,7 @@
 package com.szylas.medicamenttracker.models.meds;
 
+import java.util.List;
+
 public class Syrup extends Medicament {
     private int volume;
 
@@ -42,5 +44,13 @@ public class Syrup extends Medicament {
 
     public int getVolume() {
         return volume;
+    }
+
+    @Override
+    public void setValues(List<Integer> values) {
+        this.quantity = values.get(0);
+        this.dose = values.get(1);
+        this.volume = values.get(2);
+
     }
 }

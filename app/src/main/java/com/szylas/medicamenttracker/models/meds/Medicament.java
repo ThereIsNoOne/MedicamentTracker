@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.szylas.medicamenttracker.exceptions.OutOfMedsException;
 
+import java.util.List;
 import java.util.Locale;
 
 public abstract class Medicament {
@@ -60,5 +61,11 @@ public abstract class Medicament {
     @Override
     public String toString() {
         return name;
+    }
+
+    public void setValues(List<Integer> values) {
+        this.quantity = values.get(0);
+        this.dose = values.get(1);
+
     }
 }

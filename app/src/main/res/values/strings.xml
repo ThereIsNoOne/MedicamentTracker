@@ -25,7 +25,5 @@
     <string name="med_dose_hint">Dose</string>
     <string name="med_volume_hint">Volume</string>
     <string name="add_med_button_text">Add</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="example_text">example text</string>
 </resources>
