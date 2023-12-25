@@ -2,6 +2,7 @@ package com.szylas.medicamenttracker.ui.fragments;
 
 
 import static com.szylas.medicamenttracker.ui.helpers.InputParser.parseDateToString;
+import static com.szylas.medicamenttracker.ui.helpers.ParcelPacker.pack;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,7 @@ import com.szylas.medicamenttracker.models.Treatment;
 import com.szylas.medicamenttracker.ui.abstr.DateTimeFragment;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.TreatmentParcel;
-import com.szylas.medicamenttracker.ui.viewmodels.MangeMedsViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.ManageMedsViewModel;
 
 public class ManageDateTimesFragment extends DateTimeFragment {
 
@@ -34,12 +35,11 @@ public class ManageDateTimesFragment extends DateTimeFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         this.view = view;
-        setViewModel(MangeMedsViewModel.class);
+        setViewModel(ManageMedsViewModel.class);
         setRecyclerView();
         setApplicationTimePicker(R.id.application_time_field, R.id.application_time_picker);
         setFinishDatePicker(R.id.finish_date_field, R.id.finish_date_picker);
         setStartDatePicker(R.id.start_date_field, R.id.start_date_picker);
-        setButton();
 
         Thread thread = new Thread(this::run);
         thread.start();
@@ -83,12 +83,17 @@ public class ManageDateTimesFragment extends DateTimeFragment {
 
         treatment = treatmentParcel.getTreatment();
         requireActivity().runOnUiThread(this::setDates);
+        requireActivity().runOnUiThread(this::setButton);
     }
 
     @Override
     protected void setButton() {
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Literals.TREATMENT_PARCEL, pack(treatment));
+
         MaterialButton accept = view.findViewById(R.id.add_single_med);
         accept.setOnClickListener(view_param -> Navigation.findNavController(view).navigate(
-                R.id.action_manageDateTimesFragment_to_manageMedicationsFragment));
+                R.id.action_manageDateTimesFragment_to_manageMedicationsFragment, bundle));
     }
 }

@@ -19,12 +19,11 @@ import com.szylas.medicamenttracker.ui.activities.ManageMedsActivity;
 import com.szylas.medicamenttracker.ui.adapters.ManageTreatmentAdapter;
 import com.szylas.medicamenttracker.ui.helpers.Literals;
 import com.szylas.medicamenttracker.ui.helpers.ParcelPacker;
-import com.szylas.medicamenttracker.ui.viewmodels.MangeMedsViewModel;
-import com.szylas.medicamenttracker.ui.viewmodels.TreatmentDataViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.ManageMedsViewModel;
 
 public class ManageTreatmentsFragment extends Fragment {
 
-    private MangeMedsViewModel viewModel;
+    private ManageMedsViewModel viewModel;
 
     private View view;
     public ManageTreatmentsFragment() {
@@ -45,7 +44,7 @@ public class ManageTreatmentsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle bundle) {
         this.view = view;
-        viewModel = new ViewModelProvider(requireActivity()).get(MangeMedsViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ManageMedsViewModel.class);
         setupRecyclerView();
     }
 
@@ -56,7 +55,6 @@ public class ManageTreatmentsFragment extends Fragment {
         ManageTreatmentAdapter adapter = new ManageTreatmentAdapter(manager, position -> {
             // Informs which treatment is being modified
             viewModel.setCurrentPosition(position);
-
 
             // Packs information about treatment
             Bundle treatmentBundle = new Bundle();

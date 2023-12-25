@@ -2,12 +2,22 @@ package com.szylas.medicamenttracker.ui.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class MangeMedsViewModel extends DateTimeViewModel {
+import com.szylas.medicamenttracker.models.Treatment;
+
+public class ManageMedsViewModel extends DateTimeViewModel {
 
     private final MutableLiveData<Integer> currentPosition = new MutableLiveData<>();
-    private boolean hasChanged = false;
+
+    private final MutableLiveData<Treatment> newTreatment = new MutableLiveData<>();
+
+    public LiveData<Treatment> getNewTreatment() {
+        return newTreatment;
+    }
+
+    public void setNewTreatment(Treatment treatment) {
+        newTreatment.setValue(treatment);
+    }
 
     public LiveData<Integer> getCurrentPosition() {
         return currentPosition;
@@ -15,12 +25,5 @@ public class MangeMedsViewModel extends DateTimeViewModel {
 
     public void setCurrentPosition(Integer currentPosition) {
         this.currentPosition.setValue(currentPosition);
-    }
-    public boolean isHasChanged() {
-        return hasChanged;
-    }
-
-    public void setHasChanged(boolean hasChanged) {
-        this.hasChanged = hasChanged;
     }
 }

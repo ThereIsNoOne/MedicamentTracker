@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/fab_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <TextView
+        android:id="@+id/med_name_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/example_text"
+        app:layout_constraintRight_toLeftOf="@id/med_type_text_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:padding="@dimen/padding"/>
+    <TextView
+        android:id="@+id/med_type_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/example_text"
+        android:gravity="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/med_name_text_view"
+        android:layout_margin="@dimen/fab_margin"
+        android:padding="@dimen/padding"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:id="@+id/quantity_manage_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_name_text_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/dose_manage_input"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="3"
+        android:hint="@string/med_quantity_hint"
+        android:enabled="true"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/dose_manage_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_name_text_view"
+        app:layout_constraintLeft_toRightOf="@id/quantity_manage_input"
+        app:layout_constraintRight_toLeftOf="@id/volume_manage_input"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="5"
+        android:hint="@string/med_dose_hint"
+        android:enabled="true"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/volume_manage_input"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/item_height"
+        app:layout_constraintTop_toBottomOf="@id/med_name_text_view"
+        app:layout_constraintLeft_toRightOf="@id/dose_manage_input"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:maxLines="1"
+        android:inputType="number"
+        android:maxLength="5"
+        android:hint="@string/med_volume_hint"
+        android:enabled="true"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

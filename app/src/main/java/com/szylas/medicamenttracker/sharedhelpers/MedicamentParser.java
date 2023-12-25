@@ -10,16 +10,7 @@ public final class MedicamentParser {
     private MedicamentParser() {}
 
     public static MedType determineType(String medicationValue) {
-        switch (medicationValue) {
-            case "PILL":
-                return MedType.PILL;
-            case "SYRUP":
-                return MedType.SYRUP;
-            case "INJECTION":
-                return MedType.INJECTION;
-            default:
-                throw new IllegalStateException("Unknown MedType: " + medicationValue);
-        }
+        return MedType.valueOf(medicationValue);
     }
 
     public static Optional<Medicament> parseSingleMedicament(String medicationValue) {
