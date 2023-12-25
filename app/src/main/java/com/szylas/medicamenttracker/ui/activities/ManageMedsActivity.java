@@ -5,14 +5,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.szylas.medicamenttracker.R;
 import com.szylas.medicamenttracker.computation.TreatmentsManager;
 import com.szylas.medicamenttracker.ui.abstr.TimeAdapterable;
 import com.szylas.medicamenttracker.ui.adapters.TimesAdapter;
-import com.szylas.medicamenttracker.ui.viewmodels.MangeMedsViewModel;
+import com.szylas.medicamenttracker.ui.viewmodels.ManageMedsViewModel;
 
 import java.util.Objects;
 
@@ -42,11 +41,10 @@ public class ManageMedsActivity extends AppCompatActivity implements TimeAdapter
     }
 
     private void setUpViewModel() {
-        MangeMedsViewModel viewModel = new ViewModelProvider(this).get(MangeMedsViewModel.class);
+        ManageMedsViewModel viewModel = new ViewModelProvider(this).get(ManageMedsViewModel.class);
         viewModel.getCurrentPosition().observe(this, item -> currentModification = item);
         viewModel.getSelectedTime().observe(this, item -> adapter.addItem(item));
-
-
+        viewModel.getNewTreatment().observe(this, item -> manager.replaceTreatment(currentModification, item));
     }
 
     public TreatmentsManager getManager() {

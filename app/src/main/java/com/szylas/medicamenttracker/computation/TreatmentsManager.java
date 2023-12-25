@@ -60,4 +60,8 @@ public class TreatmentsManager {
         TreatmentsWriter.save(currentTreatments, context);
     }
 
+    public void replaceTreatment(final int position, Treatment treatment) {
+        treatmentsList.remove(position);
+        treatmentsList.add(position, treatment);
+    }
 }
